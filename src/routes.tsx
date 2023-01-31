@@ -1,7 +1,9 @@
 import React from 'react';
 import {Routes, Route} from 'react-router-dom';
-import {Placeholder} from './pages/page-placeholder';
-import {Home} from './pages/page-home';
+import Placeholder from './pages/page-placeholder';
+import Home from './pages/page-home';
+import Base64 from './pages/page-base64';
+import Diff from './pages/page-diff';
 
 export type AppRoutes = Array<{
 	path: string;
@@ -12,16 +14,16 @@ export type AppRoutes = Array<{
 }>;
 export const routes: AppRoutes = [
 	{
-		path: '/staff',
-		display: 'Staff',
-		element: <Placeholder role='Staff' />,
+		path: '/base64',
+		display: 'Base64',
+		element: <Base64 />,
 		isNav: true,
 		navValue: 10,
 	},
 	{
-		path: '/product',
-		display: 'Product',
-		element: <Placeholder role='Product' />,
+		path: '/diff',
+		display: 'Diff',
+		element: <Diff />,
 		isNav: true,
 		navValue: 20,
 	},
@@ -29,14 +31,14 @@ export const routes: AppRoutes = [
 		path: '/developer',
 		display: 'Developer',
 		element: <Placeholder role='Developer' />,
-		isNav: true,
+		isNav: false,
 		navValue: 30,
 	},
 	{
 		path: '/admin',
 		display: 'Admin',
 		element: <Placeholder role='Admin' />,
-		isNav: true,
+		isNav: false,
 		navValue: 40,
 	},
 	{

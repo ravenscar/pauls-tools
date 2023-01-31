@@ -6,17 +6,19 @@ import {authedLinks} from '../routes';
 
 const Nav = styled.nav`
 	display: grid;
-	grid-column: col-start / span 12;
-	grid-row: 1;
+	grid-template-columns: auto auto auto;
+	grid-template-rows: auto;
 	background-color: ${props => props.theme.colors.featureBackground};
 	padding-top: 10px;
 	padding-bottom: 10px;
 `;
 
 const NavRow = styled.div`
-	display: flex;
-	flex-direction: row;
-	margin: 0;
+	grid-column: 1;
+	grid-row: 1;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-bottom: auto;
 	padding: 0;
 `;
 
@@ -31,7 +33,7 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 const DarkmodeToggle = styled.button`
-	grid-column: col-start 10 / span 2;
+	grid-column: 3;
 	grid-row: 1;
 	color: ${props => props.theme.colors.featureBackgroundContrast2};
 	background-color: ${props => props.theme.colors.featureBackground2};
@@ -45,6 +47,7 @@ const DarkmodeToggle = styled.button`
 		background-color: ${props => props.theme.colors.featureBackgroundContrast2};
 		color: ${props => props.theme.colors.featureBackground2};
 	}
+	cursor: pointer;
 `;
 
 const activeStyle = {

@@ -4,19 +4,20 @@ import {NavigationBar} from './navigation-bar';
 
 const Container = styled.div`
 	display: grid;
-	grid-template-columns: repeat(12, [col-start] 1fr);
-	grid-template-areas:
-		'header header  header'
-		'content content content'
-		'content content content'
-		'footer footer footer';
-	gap: 20px;
-	margin-bottom: 50px;
+	grid-template-columns: 1fr;
+	grid-template-rows: 60px 1fr;
+	min-height: 100vh;
 `;
 
 const Page = styled.div`
-	grid-column: col-start / span 12;
+	display: inline-grid;
+	grid-column: 1;
 	grid-row: 2;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	margin: 20px;
+	min-height: ${() => window.innerHeight - 150}px;
+	max-height: ${() => window.innerHeight - 150}px;
 `;
 
 const Footer = styled.footer`

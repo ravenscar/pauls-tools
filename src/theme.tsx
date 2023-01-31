@@ -1,32 +1,42 @@
 export const lightTheme = {
+	features: {
+		isDark: false,
+	},
 	colors: {
 		background: 'white',
 		text: 'black',
-		featureBackground: 'rgb(237, 115, 35)', // E.g. SB orange
-		featureBackground2: 'rgb(200, 85, 35)', // E.g. a button BG if on SB orange
-		featureBackgroundContrast: 'white', // E.g. text colour on the orange background
-		featureBackgroundContrast2: 'white', // E.g. text colour on the other feature background
+		featureBackground: 'rgb(135, 185, 200)',
+		featureBackground2: 'rgb(75, 125, 200)',
+		featureBackgroundContrast: 'white',
+		featureBackgroundContrast2: 'white',
 		tableOddRowBackground: 'lightgrey',
 		tableBorder: 'grey',
 		highlight: 'yellow',
 		highlightBackground: 'black',
+		error: 'red',
+		link: 'blue',
 	},
 };
 
 type TheTheme = typeof lightTheme & typeof darkTheme;
 
 export const darkTheme = {
+	features: {
+		isDark: true,
+	},
 	colors: {
 		background: 'black',
 		text: 'rgb(200,200,200)',
-		featureBackground: 'rgb(130, 55, 05)',
-		featureBackground2: 'rgb(200, 85, 35)',
+		featureBackground: 'rgb(5, 55, 130)',
+		featureBackground2: 'rgb(35, 85, 200)',
 		featureBackgroundContrast: 'rgb(200,200,200)',
 		featureBackgroundContrast2: 'rgb(200,200,200)',
 		tableOddRowBackground: 'rgb(50,50,50)',
 		tableBorder: 'rgb(100,100,100)',
 		highlight: 'black',
 		highlightBackground: 'yellow',
+		error: 'red',
+		link: 'lightblue',
 	},
 };
 

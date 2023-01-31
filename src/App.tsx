@@ -20,35 +20,41 @@ function App() {
 		}
 	}, [darkmode]);
 
+	const globalStyles = css`
+		body {
+			margin: 0;
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+				'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+				'Helvetica Neue', sans-serif;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			background-color: ${theme.colors.background};
+			color: ${theme.colors.text};
+		}
+
+		code {
+			font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+				monospace;
+		}
+
+		td:first-of-type {
+			font-weight: bold;
+		}
+
+		a {
+			color: ${theme.colors.link};
+		}
+
+		textarea {
+			background-color: ${theme.colors.background};
+			color: ${theme.colors.text};
+			border-color: ${theme.colors.tableBorder};
+		}
+	`;
+
 	return (
 		<>
-			<Global
-				styles={css`
-					body {
-						margin: 0;
-						font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-							'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-							'Helvetica Neue', sans-serif;
-						-webkit-font-smoothing: antialiased;
-						-moz-osx-font-smoothing: grayscale;
-						background-color: ${theme.colors.background};
-						color: ${theme.colors.text};
-					}
-
-					code {
-						font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-							monospace;
-					}
-
-					td:first-of-type {
-						font-weight: bold;
-					}
-
-					a {
-						color: #61dafb;
-					}
-				`}
-			/>
+			<Global styles={globalStyles} />
 			<ThemeProvider theme={theme}>
 				<PageLayout
 					toggleDarkmode={() => {

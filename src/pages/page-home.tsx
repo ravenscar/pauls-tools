@@ -11,7 +11,7 @@ const HomeContainer = styled.div`
 	justify-content: center;
 `;
 
-export const Home = () => (
+const Home = () => (
 	<HomeContainer>
 		<img src={logo} className='App-logo' alt='logo' />
 		<p>
@@ -36,3 +36,5 @@ export const Home = () => (
 		</a>
 	</HomeContainer>
 );
+
+export default Home;
