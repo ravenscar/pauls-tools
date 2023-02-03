@@ -8,17 +8,14 @@ module.exports = {
 			version: 'detect',
 		},
 	},
-	extends: ['plugin:react/recommended', 'xo'],
-	overrides: [
-		{
-			extends: ['xo-typescript'],
-			files: ['*.ts', '*.tsx'],
-		},
+	extends: [
+		'plugin:react/recommended',
+		'plugin:@typescript-eslint/recommended',
 	],
 	parserOptions: {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
 	},
-	plugins: ['react', '@emotion'],
+	plugins: ['react', '@emotion', '@typescript-eslint'],
 	rules: {},
 };

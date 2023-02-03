@@ -5,24 +5,23 @@ import {NavigationBar} from './navigation-bar';
 const Container = styled.div`
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 60px 1fr;
+	grid-template-rows: auto 1fr auto;
 	min-height: 100vh;
+	max-height: 100vh;
+	grid-gap: 10px;
+	grid-template-areas:
+		'header'
+		'content'
+		'footer';
 `;
 
 const Page = styled.div`
-	display: inline-grid;
-	grid-column: 1;
-	grid-row: 2;
-	grid-template-columns: 1fr;
-	grid-template-rows: 1fr;
-	margin: 20px;
-	min-height: ${() => window.innerHeight - 150}px;
-	max-height: ${() => window.innerHeight - 150}px;
+	padding: 20px;
+	min-height: 100%;
+	max-height: 100%;
 `;
 
 const Footer = styled.footer`
-	position: fixed;
-	bottom: 0;
 	width: 100%;
 	height: 30px;
 	padding: 10px;
@@ -38,9 +37,9 @@ type Props = PropsWithChildren & {
 
 export const PageLayout = (props: Props) => (
 	<Container>
-		<NavigationBar toggleDarkmode={props.toggleDarkmode} />
+		<NavigationBar id='header' toggleDarkmode={props.toggleDarkmode} />
 		<Page>{props.children}</Page>
-		<Footer>
+		<Footer id='footer'>
 			<center>
 				Drink more beer.&nbsp;
 				<a

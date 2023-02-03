@@ -3,19 +3,19 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import styled from '@emotion/styled';
 import {authedLinks} from '../routes';
+import {Button} from '../pages/style-helpers';
 
 const Nav = styled.nav`
 	display: grid;
-	grid-template-columns: auto auto auto;
-	grid-template-rows: auto;
+	grid-area: header;
+	grid-template-areas: 'nav spacing settings';
 	background-color: ${props => props.theme.colors.featureBackground};
 	padding-top: 10px;
 	padding-bottom: 10px;
 `;
 
 const NavRow = styled.div`
-	grid-column: 1;
-	grid-row: 1;
+	grid-area: nav;
 	margin-top: auto;
 	margin-bottom: auto;
 	margin-bottom: auto;
@@ -30,49 +30,32 @@ const StyledNavLink = styled(NavLink)`
 	&:hover {
 		text-decoration: underline;
 	}
-`;
-
-const DarkmodeToggle = styled.button`
-	grid-column: 3;
-	grid-row: 1;
-	color: ${props => props.theme.colors.featureBackgroundContrast2};
-	background-color: ${props => props.theme.colors.featureBackground2};
-	margin-left: auto;
-	border-radius: 5px;
-	margin-right: 10px;
-	border: none;
-	padding: 10px;
-	font-weight: 700;
-	&:hover {
-		background-color: ${props => props.theme.colors.featureBackgroundContrast2};
-		color: ${props => props.theme.colors.featureBackground2};
+	&.active {
 	}
-	cursor: pointer;
 `;
 
-const activeStyle = {
-	fontWeight: 700,
-};
+const DarkmodeToggle = styled(Button)`
+	grid-area: settings;
+	margin-left: auto;
+	margin-right: 10px;
+`;
 
 type Props = {
 	toggleDarkmode: () => void;
+	id: string;
 };
 
 export const NavigationBar = (props: Props) => (
-	<>
-		<Nav>
-			<NavRow>
-				{authedLinks.map(({path, display}) => (
-					<StyledNavLink
-						to={path}
-						key={path}
-						style={({isActive}) => (isActive ? activeStyle : undefined)}
-					>
-						{display}
-					</StyledNavLink>
-				))}
-			</NavRow>
-			<DarkmodeToggle onClick={props.toggleDarkmode}>🌞 / 🌙</DarkmodeToggle>
-		</Nav>
-	</>
+	<Nav id={props.id}>
+		<NavRow>
+			{authedLinks.map(({path, display}) => (
+				<StyledNavLink to={path} key={path}>
+					{display}
+				</StyledNavLink>
+			))}
+		</NavRow>
+		<DarkmodeToggle selected={true} onClick={props.toggleDarkmode}>
+			🌞 / 🌙
+		</DarkmodeToggle>
+	</Nav>
 );

@@ -7,40 +7,32 @@ import {parseLanguageString, type ParseMode, parseModes} from './util';
 
 const Container = styled.div`
 	display: grid;
-	grid-column: 1;
-	grid-row: 1;
 	grid-template-columns: auto 1fr 1fr;
 	grid-template-rows: 1fr 1fr;
-	gap: 20px;
+	gap: 10px;
 	min-height: 100%;
 	max-height: 100%;
 `;
 
 const Selection = styled.div`
 	display: grid;
-	grid-column: 1;
-	grid-row: 1 / span 2;
+	grid-row: span 2;
 	align-items: baseline;
 `;
 
 const Old = styled.div`
 	display: grid;
-	grid-column: 2;
-	grid-row: 1;
 	justify-items: stretch;
 `;
 
 const New = styled.div`
 	display: grid;
-	grid-column: 3;
-	grid-row: 1;
 	justify-items: stretch;
 `;
 
 const Output = styled.div`
 	display: grid;
-	grid-column: 2 / span 2;
-	grid-row: 2;
+	grid-column: span 2;
 	justify-items: stretch;
 	overflow: scroll;
 `;

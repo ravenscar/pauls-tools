@@ -1,22 +1,13 @@
-import styled from '@emotion/styled';
 import React from 'react';
+
+import styled from '@emotion/styled';
+import {Button} from '../style-helpers';
 
 import {parseModes, type ParseMode} from './util';
 
 const Container = styled.div`
 	display: grid;
-`;
-const Button = styled.div<{selected: boolean}>`
-	background-color: ${props =>
-		props.selected
-			? props.theme.colors.featureBackground2
-			: props.theme.colors.featureBackground};
-	text-align: center;
-	padding: 10px;
-	border-radius: 5px;
-	border: 10px green;
-	margin: 5px;
-	cursor: pointer;
+	gap: 10px;
 `;
 export const ParseModeButtons = ({
 	parseMode,

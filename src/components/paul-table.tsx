@@ -39,7 +39,7 @@ const Td = styled.td`
 	padding: 8px;
 `;
 
-type TableRow = any[];
+type TableRow = (string | number)[];
 
 export const PaulTable = (props: {
 	data: TableRow[];

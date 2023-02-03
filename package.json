@@ -16,6 +16,7 @@
     "@types/react-dom": "^18.0.10",
     "@types/uuid": "^9.0.0",
     "json-stable-stringify": "^1.0.2",
+    "nanoid": "^4.0.0",
     "react": "^18.2.0",
     "react-diff-viewer-continued": "^3.2.5",
     "react-dom": "^18.2.0",
@@ -29,7 +30,7 @@
     "_mkLogo192": "convert -background none -resize 192x192 src/logo.svg public/logo192.png",
     "_mkLogo512": "convert -background none -resize 512x512 src/logo.svg public/logo512.png",
     "_mkFavicon": "convert public/logo512.png -define icon:auto-resize=64,48,32,16 public/favicon.ico",
-    "start": "react-scripts start",
+    "start": "PORT=6969 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -64,8 +65,6 @@
     "@typescript-eslint/eslint-plugin": "^5.49.0",
     "@typescript-eslint/parser": "^5.49.0",
     "eslint": "^8.33.0",
-    "eslint-config-xo": "^0.43.1",
-    "eslint-config-xo-typescript": "^0.55.1",
     "eslint-plugin-react": "^7.32.2",
     "typescript": "^4.9.4"
   }
