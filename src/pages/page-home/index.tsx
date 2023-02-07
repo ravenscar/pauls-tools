@@ -47,6 +47,13 @@ const Home = () => {
 	const [selected, setSelected] = useState<Todo | undefined>();
 	const files = useEditorFilelist();
 
+	const purge = async () => {
+		await purgeCompletedTodos();
+		if (selected && selected.completed) {
+			setSelected(undefined);
+		}
+	};
+
 	return (
 		<Page>
 			<Sidebar>
@@ -68,7 +75,7 @@ const Home = () => {
 							clearUpdate={() => setSelected(undefined)}
 						/>
 						<TodoList selected={setSelected} />
-						<Cleanup onClick={purgeCompletedTodos}>🗑️</Cleanup>
+						<Cleanup onClick={purge}>🗑️</Cleanup>
 					</Todos>
 				</Half>
 			</Container>

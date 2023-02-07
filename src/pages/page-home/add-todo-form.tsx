@@ -11,6 +11,7 @@ import {Button} from '../style-helpers';
 
 import {StickyNote} from './style';
 import {PriorityBar} from './priority';
+import {useSerialize} from '../../storage/cache';
 
 const AddNoteContainer = styled.div`
 	display: grid;
@@ -64,6 +65,12 @@ export const AddTodoForm = ({
 	const [completed, setCompleted] = useState(false);
 	const [id, setId] = useState<number | undefined>();
 
+	useSerialize(
+		'/notes/todo/form',
+		{text, priority, completed, id},
+		{text: setText, priority: setPriority, completed: setCompleted, id: setId},
+	);
+
 	useEffect(() => {
 		if (updateTodo) {
 			setText(updateTodo.text);
@@ -116,7 +123,14 @@ export const AddTodoForm = ({
 					</AddNoteAddButton>
 				)}
 				{id !== undefined && (
-					<AddNoteAddButton onClick={clearUpdate}>Cancel</AddNoteAddButton>
+					<AddNoteAddButton
+						onClick={() => {
+							clearUpdate();
+							clear();
+						}}
+					>
+						Cancel
+					</AddNoteAddButton>
 				)}
 				<AddNoteAddButton onClick={addTodo}>
 					{id === undefined ? 'Add' : 'Update'}

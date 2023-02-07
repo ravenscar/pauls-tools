@@ -3,6 +3,7 @@ import React from 'react';
 import {v4} from 'uuid';
 import {nanoid} from 'nanoid';
 import {Area, BigLeft, Button, Container, Half, Quarter} from './style-helpers';
+import {useSerialize} from '../storage/cache';
 
 const Base64 = () => {
 	const [text, setText] = React.useState(atob(''));
@@ -15,6 +16,19 @@ const Base64 = () => {
 
 	const [uuid, setUuid] = React.useState('');
 	const [nanoId, setNanoId] = React.useState('');
+
+	useSerialize(
+		'/b64',
+		{text, b64, jot, jotProps, uuid, nanoId},
+		{
+			text: setText,
+			b64: setB64,
+			jot: setJot,
+			jotProps: setJotProps,
+			uuid: setUuid,
+			nanoId: setNanoId,
+		},
+	);
 
 	const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		const val = e.target.value;

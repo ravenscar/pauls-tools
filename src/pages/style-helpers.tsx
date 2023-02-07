@@ -51,6 +51,7 @@ export const BigRight = styled.div`
 
 export const Area = styled.textarea<{'min-height'?: string}>`
 	resize: none;
+	tab-size: 2;
 	${props => (props['min-height'] ? `min-height: ${props['min-height']}` : '')}
 `;
 
