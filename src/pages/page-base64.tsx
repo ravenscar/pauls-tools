@@ -2,21 +2,17 @@ import styled from '@emotion/styled';
 import React from 'react';
 import {v4} from 'uuid';
 import {nanoid} from 'nanoid';
-import {
-	Area,
-	Bad,
-	BigLeft,
-	BigRight,
-	Button,
-	ContainerBaseline,
-	Half,
-	Quarter,
-} from './style-helpers';
+import {Area, BigLeft, Button, Container, Half, Quarter} from './style-helpers';
 
 const Base64 = () => {
 	const [text, setText] = React.useState(atob(''));
 	const [b64, setB64] = React.useState('');
 	const [badBase64, setBadBase64] = React.useState(false);
+
+	const [jot, setJot] = React.useState('');
+	const [jotProps, setJotProps] = React.useState('');
+	const [badJot, setBadJot] = React.useState(false);
+
 	const [uuid, setUuid] = React.useState('');
 	const [nanoId, setNanoId] = React.useState('');
 
@@ -38,6 +34,26 @@ const Base64 = () => {
 		}
 	};
 
+	const handleJotChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		const val = e.target.value;
+		try {
+			setJot(val);
+			const [, meat] = val.split('.');
+			const decoded = atob(meat);
+			const parsed = JSON.parse(decoded);
+			setJotProps(JSON.stringify(parsed, null, 2));
+			setBadJot(false);
+		} catch {
+			setJotProps('');
+			setBadJot(true);
+		}
+	};
+
+	const handleJotPropsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		const val = e.target.value;
+		setJotProps(val);
+	};
+
 	const handleUuid = async () => {
 		const value = v4();
 		setUuid(value);
@@ -51,20 +67,39 @@ const Base64 = () => {
 	};
 
 	return (
-		<ContainerBaseline>
+		<Container>
 			<Half>
-				<BigRight>
-					<h3>Ascii&nbsp;</h3>
-					<Area onChange={handleTextChange} value={text} />
-				</BigRight>
+				<Area
+					placeholder='text'
+					min-height='200px'
+					onChange={handleTextChange}
+					value={text}
+				/>
 			</Half>
 			<Half>
-				<BigRight>
-					<h3>
-						Base64 <Bad>{badBase64 ? 'x' : ''}</Bad>&nbsp;
-					</h3>
-					<Area onChange={handleB64Change} value={b64} />
-				</BigRight>
+				<Area
+					placeholder='b64 encoded'
+					min-height='200px'
+					onChange={handleB64Change}
+					value={b64}
+				/>
+			</Half>
+
+			<Half>
+				<Area
+					placeholder='jwt'
+					min-height='300px'
+					onChange={handleJotChange}
+					value={jot}
+				/>
+			</Half>
+			<Half>
+				<Area
+					placeholder='props'
+					min-height='300px'
+					onChange={handleJotPropsChange}
+					value={jotProps}
+				/>
 			</Half>
 
 			<Quarter>
@@ -79,7 +114,7 @@ const Base64 = () => {
 					<Button onClick={handleNanoId}>Nano ID + copy</Button>
 				</BigLeft>
 			</Quarter>
-		</ContainerBaseline>
+		</Container>
 	);
 };
 

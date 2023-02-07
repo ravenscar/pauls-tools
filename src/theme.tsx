@@ -13,6 +13,9 @@ export const getGlobalStyles = (theme: Theme) => css`
 		--midlightblue: rgb(75, 125, 200);
 		--middarkblue: rgb(35, 85, 200);
 		--darkblue: rgb(5, 55, 130);
+
+		--stickyNoteBackground: rgb(255, 245, 188);
+		--stickyNotePen: var(--darkgray);
 	}
 
 	html {

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const ContainerBaseline = styled.div<{vertStretch?: boolean}>`
+export const Container = styled.div<{vertStretch?: boolean}>`
 	display: grid;
 	grid-template-columns: repeat(12, 1fr);
 	grid-gap: 10px;
@@ -49,8 +49,9 @@ export const BigRight = styled.div`
 	justify-items: stretch;
 `;
 
-export const Area = styled.textarea`
+export const Area = styled.textarea<{'min-height'?: string}>`
 	resize: none;
+	${props => (props['min-height'] ? `min-height: ${props['min-height']}` : '')}
 `;
 
 export const Button = styled.div<{selected?: boolean}>`
