@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from '@emotion/styled';
+import {CheckCircle, Save, Slash, XCircle} from 'react-feather';
 
 import {
 	Priority,
@@ -7,7 +8,7 @@ import {
 	Todo,
 	upsertTodo,
 } from '../../../storage/todos';
-import {Button} from '../../style-helpers';
+import {Button, StealthButton} from '../../style-helpers';
 
 import {StickyNote} from './style';
 import {PriorityBar} from './priority';
@@ -46,13 +47,6 @@ const Controls = styled.div`
 	min-width: 0%;
 	margin-left: 10px;
 `;
-const AddNoteAddButton = styled(Button)`
-	margin-top: 10px;
-	justify-self: left;
-	align-self: end;
-	min-width: 100px;
-`;
-
 export const AddTodoForm = ({
 	updateTodo,
 	clearUpdate,
@@ -118,23 +112,23 @@ export const AddTodoForm = ({
 			</AddStickyNote>
 			<Controls>
 				{id !== undefined && (
-					<AddNoteAddButton onClick={toggleCompleted}>
-						{completed ? 'Restore' : 'Delete'}
-					</AddNoteAddButton>
+					<StealthButton onClick={toggleCompleted}>
+						{completed ? <XCircle /> : <CheckCircle />}
+					</StealthButton>
 				)}
 				{id !== undefined && (
-					<AddNoteAddButton
+					<StealthButton
 						onClick={() => {
 							clearUpdate();
 							clear();
 						}}
 					>
-						Cancel
-					</AddNoteAddButton>
+						<Slash />
+					</StealthButton>
 				)}
-				<AddNoteAddButton onClick={addTodo}>
-					{id === undefined ? 'Add' : 'Update'}
-				</AddNoteAddButton>
+				<StealthButton onClick={addTodo}>
+					<Save />
+				</StealthButton>
 			</Controls>
 		</AddNoteContainer>
 	);

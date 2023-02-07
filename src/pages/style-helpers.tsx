@@ -55,6 +55,14 @@ export const Area = styled.textarea<{'min-height'?: string}>`
 	${props => (props['min-height'] ? `min-height: ${props['min-height']}` : '')}
 `;
 
+export const ButtonBase = styled.div`
+	text-align: center;
+	padding: 10px;
+	border-radius: 5px;
+	border: 10px;
+	cursor: pointer;
+`;
+
 export const Button = styled.div<{selected?: boolean}>`
 	background-color: ${props =>
 		props.selected
@@ -73,6 +81,16 @@ export const Button = styled.div<{selected?: boolean}>`
 	text-align: center;
 	padding: 10px;
 	border-radius: 5px;
-	border: 10px green;
+	border: 10px;
 	cursor: pointer;
+`;
+
+export const StealthButton = styled(ButtonBase)`
+	background-color: ${props => props.theme.colors.background};
+	color: ${props => props.theme.colors.text};
+
+	&:hover {
+		background-color: ${props => props.theme.colors.text};
+		color: ${props => props.theme.colors.background};
+	}
 `;

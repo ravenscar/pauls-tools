@@ -40,7 +40,15 @@ export const getGlobalStyles = (theme: Theme) => css`
 
 	body {
 		overflow: hidden;
+		max-height: 100vh;
+		min-height: 100vh;
 		background-color: ${theme.colors.background};
+	}
+
+	#root {
+		max-height: 100vh;
+		min-height: 100vh;
+		overflow: auto;
 	}
 
 	h1,
@@ -55,9 +63,6 @@ export const getGlobalStyles = (theme: Theme) => css`
 	p {
 		font-size: 15px;
 		margin: 5px;
-	}
-
-	body {
 	}
 
 	code {

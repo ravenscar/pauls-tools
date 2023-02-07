@@ -3,12 +3,13 @@ import styled from '@emotion/styled';
 import {NavigationBar} from './navigation-bar';
 
 const Container = styled.div`
+	min-height: 100%;
+	max-height: 100%;
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: auto 1fr auto;
 	min-height: 100vh;
 	max-height: 100vh;
-	grid-gap: 10px;
 	grid-template-areas:
 		'header'
 		'content'
@@ -16,7 +17,7 @@ const Container = styled.div`
 `;
 
 const Page = styled.div`
-	padding: 20px;
+	margin: 20px;
 	min-height: 100%;
 	max-height: 100%;
 `;
@@ -24,7 +25,7 @@ const Page = styled.div`
 const Footer = styled.footer`
 	width: 100%;
 	height: 30px;
-	padding: 10px;
+	margin: 10px;
 	background-color: ${props => props.theme.colors.featureBackground};
 	color: ${props => props.theme.colors.featureBackgroundContrast};
 	font-size: small;
