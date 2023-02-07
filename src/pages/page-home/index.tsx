@@ -3,8 +3,8 @@ import styled from '@emotion/styled';
 
 import {Area, BigRight, Button, Container, Half} from '../style-helpers';
 
-import {AddTodoForm} from './add-todo-form';
-import {TodoList} from './todo-list';
+import {AddTodoForm} from './todo/add-todo-form';
+import {TodoList} from './todo/todo-list';
 import {purgeCompletedTodos, Todo} from '../../storage/todos';
 import {useEditorFilelist} from '../../storage/editor';
 

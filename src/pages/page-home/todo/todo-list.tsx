@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Todo, useTodoList} from '../../storage/todos';
+import {Todo, useTodoList} from '../../../storage/todos';
 import {StickyNote, TodoBoard} from './style';
 
 export const TodoList = ({selected}: {selected: (todo: Todo) => void}) => {

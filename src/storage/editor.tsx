@@ -1,7 +1,7 @@
 import Dexie, {Table} from 'dexie';
 import {useLiveQuery} from 'dexie-react-hooks';
 
-export interface File {
+export interface EditorFile {
 	id?: number;
 	content: string;
 	title?: string;
@@ -9,7 +9,7 @@ export interface File {
 }
 
 export class EditorStore extends Dexie {
-	files!: Table<File>;
+	files!: Table<EditorFile>;
 	config!: Table<{key: 'idOrder'; value: {id: number; title?: string}[]}>;
 
 	constructor() {
@@ -39,4 +39,16 @@ export const useEditorFilelist = () => {
 
 		return value.map(({id, title}) => ({id, title: title || `<${id}>`}));
 	});
+};
+
+export const upsertFile = async (file: EditorFile) => {
+	let id = file.id;
+
+	if (id) {
+		await db.files.update(id, file);
+	} else {
+		id = (await db.files.add(file)) as Required<EditorFile>['id'];
+	}
+
+	return id;
 };

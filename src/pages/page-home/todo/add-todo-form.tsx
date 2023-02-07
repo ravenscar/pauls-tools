@@ -6,12 +6,12 @@ import {
 	setCompletedValue,
 	Todo,
 	upsertTodo,
-} from '../../storage/todos';
-import {Button} from '../style-helpers';
+} from '../../../storage/todos';
+import {Button} from '../../style-helpers';
 
 import {StickyNote} from './style';
 import {PriorityBar} from './priority';
-import {useSerialize} from '../../storage/cache';
+import {useSerialize} from '../../../storage/cache';
 
 const AddNoteContainer = styled.div`
 	display: grid;

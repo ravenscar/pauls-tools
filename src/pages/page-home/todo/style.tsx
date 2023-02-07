@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import {Priority} from '../../storage/todos';
+import {Priority} from '../../../storage/todos';
 import {getPriorityColour} from './priority';
 
 export const StickyNote = styled.div<{priority: Priority; completed?: boolean}>`
