@@ -7,7 +7,7 @@ export const StickyNote = styled.div<{priority: Priority; completed?: boolean}>`
 	grid-template-rows: 1fr auto;
 	max-width: 250px;
 	background-color: ${props =>
-		props.completed ? 'var(--gray)' : 'var(--stickyNoteBackground)'};
+		props.completed ? 'var(--lightgray)' : 'var(--stickyNoteBackground)'};
 	color: var(--stickyNotePen);
 	padding: 10px;
 	box-shadow: 5px 5px 5px 0px var(--midgray);

@@ -5,7 +5,6 @@ export const getGlobalStyles = (theme: Theme) => css`
 	:root {
 		--yellow: #ffc600;
 		--black: #000000;
-		--gray: rgb(200, 200, 200);
 		--vdarkgray: rgb(31, 31, 31);
 		--darkgray: rgb(63, 63, 63);
 		--midgray: rgb(127, 127, 127);
@@ -90,6 +89,7 @@ export const lightTheme = {
 		background: 'var(--vlightgray)',
 		background2: 'white',
 		text: 'var(--black)',
+		text2: 'black',
 		featureBackground: 'var(--lightblue)',
 		featureBackground2: 'var(--midlightblue)',
 		featureBackgroundContrast: 'white',
@@ -112,11 +112,12 @@ export const darkTheme = {
 	colors: {
 		background: 'var(--vdarkgray)',
 		background2: 'black',
-		text: 'var(--gray);',
+		text: 'var(--lightgray)',
+		text2: 'white',
 		featureBackground: 'var(--darkblue)',
 		featureBackground2: 'var(--middarkblue)',
-		featureBackgroundContrast: 'var(--gray)',
-		featureBackgroundContrast2: 'var(--gray)',
+		featureBackgroundContrast: 'var(--lightgray)',
+		featureBackgroundContrast2: 'var(--lightgray)',
 		tableOddRowBackground: 'var(--darkgray)',
 		tableBorder: 'var(--midgray)',
 		highlight: 'black',
