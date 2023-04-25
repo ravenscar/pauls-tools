@@ -13,7 +13,6 @@ const Container = styled.div`
 	grid-template-rows: 1fr 1fr;
 	gap: 10px;
 	min-height: 100%;
-	max-height: 100%;
 `;
 
 const Selection = styled.div`

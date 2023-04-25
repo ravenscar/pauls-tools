@@ -6,9 +6,13 @@ import {Area, BigLeft, Button, Container, Half, Quarter} from './style-helpers';
 import {useSerialize} from '../storage/cache';
 
 const Base64 = () => {
-	const [text, setText] = React.useState(atob(''));
+	const [b64Text, setB64Text] = React.useState(atob(''));
 	const [b64, setB64] = React.useState('');
 	const [badBase64, setBadBase64] = React.useState(false);
+
+	const [hexText, setHexText] = React.useState(atob(''));
+	const [hex, setHex] = React.useState('');
+	const [badHex, setBadHex] = React.useState(false);
 
 	const [jot, setJot] = React.useState('');
 	const [jotProps, setJotProps] = React.useState('');
@@ -19,10 +23,12 @@ const Base64 = () => {
 
 	useSerialize(
 		'/b64',
-		{text, b64, jot, jotProps, uuid, nanoId},
+		{b64Text, b64, hexText, hex, jot, jotProps, uuid, nanoId},
 		{
-			text: setText,
+			b64Text: setB64Text,
 			b64: setB64,
+			hexText: setHexText,
+			hex: setHex,
 			jot: setJot,
 			jotProps: setJotProps,
 			uuid: setUuid,
@@ -30,9 +36,9 @@ const Base64 = () => {
 		},
 	);
 
-	const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+	const handleB64TextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		const val = e.target.value;
-		setText(val);
+		setB64Text(val);
 		setB64(btoa(val));
 		setBadBase64(false);
 	};
@@ -41,10 +47,56 @@ const Base64 = () => {
 		const val = e.target.value;
 		setB64(val);
 		try {
-			setText(atob(val));
+			setB64Text(atob(val));
 			setBadBase64(false);
 		} catch {
 			setBadBase64(true);
+		}
+	};
+
+	const convertToHex = (input: string) => {
+		let output = '';
+
+		for (const c of input) {
+			output = output + c.charCodeAt(0).toString(16).padStart(2, '0');
+		}
+
+		return output;
+	};
+
+	const convertFromHex = (input: string) => {
+		let output = '';
+		let buffer = '';
+
+		for (const c of input) {
+			if (!Number.isNaN(parseInt(c, 16))) {
+				buffer = buffer + c;
+			}
+			if (buffer.length === 2) {
+				const c = String.fromCharCode(parseInt(buffer, 16));
+				output = output + c;
+				buffer = '';
+			}
+		}
+
+		return output;
+	};
+
+	const handleHexTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		const val = e.target.value;
+		setHexText(val);
+		setHex(convertToHex(val));
+		setBadHex(false);
+	};
+
+	const handleHexChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		const val = e.target.value;
+		setHex(val);
+		try {
+			setHexText(convertFromHex(val));
+			setBadHex(false);
+		} catch {
+			setBadHex(true);
 		}
 	};
 
@@ -86,8 +138,8 @@ const Base64 = () => {
 				<Area
 					placeholder='text'
 					min-height='200px'
-					onChange={handleTextChange}
-					value={text}
+					onChange={handleB64TextChange}
+					value={b64Text}
 				/>
 			</Half>
 			<Half>
@@ -96,6 +148,23 @@ const Base64 = () => {
 					min-height='200px'
 					onChange={handleB64Change}
 					value={b64}
+				/>
+			</Half>
+
+			<Half>
+				<Area
+					placeholder='text'
+					min-height='200px'
+					onChange={handleHexTextChange}
+					value={hexText}
+				/>
+			</Half>
+			<Half>
+				<Area
+					placeholder='hex encoded'
+					min-height='200px'
+					onChange={handleHexChange}
+					value={hex}
 				/>
 			</Half>
 

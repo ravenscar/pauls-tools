@@ -5,7 +5,6 @@ export const Container = styled.div<{vertStretch?: boolean}>`
 	grid-template-columns: repeat(12, 1fr);
 	grid-gap: 10px;
 	min-height: 100%;
-	max-height: 100%;
 	align-content: ${props => (props.vertStretch ? 'stretch' : 'baseline')};
 `;
 

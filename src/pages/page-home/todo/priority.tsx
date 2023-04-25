@@ -7,8 +7,7 @@ import {Priority} from '../../../storage/todos';
 const StyledPriority = styled.div`
 	display: flex;
 	flex: 1;
-	max-height: 20px;
-	min-height: 20px;
+	height: 20px;
 `;
 
 export const getPriorityColour = (priority: Priority) => {

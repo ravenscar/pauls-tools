@@ -6,18 +6,17 @@ import {authedLinks} from '../routes';
 import {Button} from '../pages/style-helpers';
 
 const Nav = styled.nav`
+	border-radius: 5px;
 	display: grid;
 	grid-area: header;
 	grid-template-areas: 'nav spacing settings';
 	background-color: ${props => props.theme.colors.featureBackground};
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding: 10px;
 `;
 
 const NavRow = styled.div`
 	grid-area: nav;
 	margin-top: auto;
-	margin-bottom: auto;
 	margin-bottom: auto;
 	padding: 0;
 `;
@@ -26,7 +25,7 @@ const StyledNavLink = styled(NavLink)`
 	color: ${props => props.theme.colors.featureBackgroundContrast};
 	text-align: center;
 	text-decoration: none;
-	padding: 10px;
+	padding-right: 10px;
 	&:hover {
 		text-decoration: underline;
 	}
@@ -37,7 +36,6 @@ const StyledNavLink = styled(NavLink)`
 const DarkmodeToggle = styled(Button)`
 	grid-area: settings;
 	margin-left: auto;
-	margin-right: 10px;
 `;
 
 type Props = {

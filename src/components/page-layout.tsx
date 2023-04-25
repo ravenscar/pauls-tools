@@ -4,12 +4,9 @@ import {NavigationBar} from './navigation-bar';
 
 const Container = styled.div`
 	min-height: 100%;
-	max-height: 100%;
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: auto 1fr auto;
-	min-height: 100vh;
-	max-height: 100vh;
+	grid-template-rows: 1fr;
 	grid-template-areas:
 		'header'
 		'content'
@@ -17,19 +14,34 @@ const Container = styled.div`
 `;
 
 const Page = styled.div`
-	margin: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 80px;
+	padding-bottom: 50px;
 	min-height: 100%;
-	max-height: 100%;
+`;
+
+const Header = styled.div`
+	position: fixed;
+	top: 0;
+	justify-self: center;
+	min-width: 90%;
+	z-index: 1;
 `;
 
 const Footer = styled.footer`
-	width: 100%;
-	height: 30px;
-	margin: 10px;
+	align-content: end;
+	position: fixed;
+	bottom: 0;
+	justify-self: center;
+	min-width: 90%;
+	z-index: 1;
+	padding: 10px;
 	background-color: ${props => props.theme.colors.featureBackground};
 	color: ${props => props.theme.colors.featureBackgroundContrast};
 	font-size: small;
 	text-align: center;
+	border-radius: 5px;
 `;
 
 type Props = PropsWithChildren & {
@@ -38,7 +50,9 @@ type Props = PropsWithChildren & {
 
 export const PageLayout = (props: Props) => (
 	<Container>
-		<NavigationBar id='header' toggleDarkmode={props.toggleDarkmode} />
+		<Header>
+			<NavigationBar id='header' toggleDarkmode={props.toggleDarkmode} />
+		</Header>
 		<Page>{props.children}</Page>
 		<Footer id='footer'>
 			<center>

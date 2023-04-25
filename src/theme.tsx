@@ -39,15 +39,11 @@ export const getGlobalStyles = (theme: Theme) => css`
 	}
 
 	body {
-		overflow: hidden;
-		max-height: 100vh;
 		min-height: 100vh;
 		background-color: ${theme.colors.background};
 	}
 
 	#root {
-		max-height: 100vh;
-		min-height: 100vh;
 		overflow: auto;
 	}
 
@@ -78,6 +74,7 @@ export const getGlobalStyles = (theme: Theme) => css`
 		background-color: ${theme.colors.background};
 		color: ${theme.colors.text};
 		border-color: ${theme.colors.tableBorder};
+		tab-size: 2;
 	}
 `;
 

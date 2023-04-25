@@ -7,14 +7,10 @@ import {AddTodoForm} from './todo/add-todo-form';
 import {TodoList} from './todo/todo-list';
 import {purgeCompletedTodos, Todo} from '../../storage/todos';
 import {useEditorFilelist} from '../../storage/editor';
-
-import ReactSimpleCodeEditor from 'react-simple-code-editor';
-// import { highlight, languages } from 'prismjs/components/prism-core';
-import {prismHighlightSyntax} from '../page-diff/prism-highlight-syntax';
+import {FilePlus, Save} from 'react-feather';
 
 const Page = styled(BigRight)`
 	min-height: 100%;
-	max-height: 100%;
 `;
 
 const Sidebar = styled.div`
@@ -43,41 +39,14 @@ const NoteControls = styled.div`
 	min-height: 100px;
 `;
 
-// const EditorForm = styled(Half)`
-// 	grid-template-rows: auto 1fr;
-// `;
-
-const EditorForm = styled.div`
-	display: flex;
-	flex-direction: column;
-	max-height: fit-content(20em);
+const EditorForm = styled(Half)`
+	grid-template-rows: auto 1fr;
 `;
 
-const EditorContainer = styled.div`
-	flex: 1;
-	overflow: scroll;
-	max-height: 100%;
-`;
-
-const Editor = styled(ReactSimpleCodeEditor)`
-	white-space: pre;
-	caret-color: #fff;
-	min-width: 100%;
-	min-height: 100%;
-	float: left;
-	& > textarea,
-	& > pre {
-		outline: none;
-		white-space: pre !important;
-	}
-`;
 const Home = () => {
 	const [selected, setSelected] = useState<Todo | undefined>();
+	const [editorContent, setEditorContent] = useState('');
 	const files = useEditorFilelist();
-
-	const [code, setCode] = React.useState(
-		`function add(a, b) {\n  return a + b;\n}`,
-	);
 
 	const purge = async () => {
 		await purgeCompletedTodos();
@@ -97,19 +66,12 @@ const Home = () => {
 			</Sidebar>
 			<Container vertStretch={true}>
 				<EditorForm>
-					<NoteControls>xxx</NoteControls>
-					<EditorContainer>
-						<Editor
-							value={code}
-							onValueChange={code => setCode(code)}
-							highlight={code => prismHighlightSyntax(code, 'js')}
-							padding={10}
-							style={{
-								fontFamily: '"Fira code", "Fira Mono", monospace',
-								fontSize: 12,
-							}}
-						/>
-					</EditorContainer>
+					<NoteControls>
+						<input />
+						<Save />
+						<FilePlus />
+					</NoteControls>
+					<Area />
 				</EditorForm>
 				<Half>
 					<Todos>

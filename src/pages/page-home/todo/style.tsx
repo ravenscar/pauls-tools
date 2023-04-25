@@ -27,7 +27,5 @@ export const TodoBoard = styled.div`
 	justify-content: center;
 	gap: 10px;
 
-	min-height: 400px;
-	max-height: 400px;
 	overflow-y: auto;
 `;
