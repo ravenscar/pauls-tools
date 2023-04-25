@@ -6,11 +6,10 @@ import {authedLinks} from '../routes';
 import {Button} from '../pages/style-helpers';
 
 const Nav = styled.nav`
-	border-radius: 5px;
 	display: grid;
 	grid-area: header;
 	grid-template-areas: 'nav spacing settings';
-	background-color: ${props => props.theme.colors.featureBackground};
+	background-color: ${props => props.theme.colors.background2};
 	padding: 10px;
 `;
 
@@ -22,12 +21,12 @@ const NavRow = styled.div`
 `;
 
 const StyledNavLink = styled(NavLink)`
-	color: ${props => props.theme.colors.featureBackgroundContrast};
+	color: ${props => props.theme.colors.text2};
 	text-align: center;
 	text-decoration: none;
 	padding-right: 10px;
 	&:hover {
-		text-decoration: underline;
+		color: ${props => props.theme.colors.link};
 	}
 	&.active {
 	}
@@ -52,8 +51,6 @@ export const NavigationBar = (props: Props) => (
 				</StyledNavLink>
 			))}
 		</NavRow>
-		<DarkmodeToggle selected={true} onClick={props.toggleDarkmode}>
-			🌞 / 🌙
-		</DarkmodeToggle>
+		<DarkmodeToggle onClick={props.toggleDarkmode}>🌞 / 🌙</DarkmodeToggle>
 	</Nav>
 );

@@ -10,6 +10,7 @@ export const getGlobalStyles = (theme: Theme) => css`
 		--midgray: rgb(127, 127, 127);
 		--lightgray: rgb(191, 191, 191);
 		--vlightgray: rgb(223, 223, 223);
+		--white: #ffffff;
 
 		--lightblue: rgb(135, 185, 200);
 		--midlightblue: rgb(75, 125, 200);
@@ -87,17 +88,13 @@ export const lightTheme = {
 	},
 	colors: {
 		background: 'var(--vlightgray)',
-		background2: 'white',
-		text: 'var(--black)',
-		text2: 'black',
-		featureBackground: 'var(--lightblue)',
-		featureBackground2: 'var(--midlightblue)',
-		featureBackgroundContrast: 'white',
-		featureBackgroundContrast2: 'white',
-		tableOddRowBackground: 'lightgrey',
-		tableBorder: 'grey',
+		background2: 'var(--white)',
+		text: 'var(--darkgray)',
+		text2: 'var(--black)',
+		tableOddRowBackground: 'var(--lightgray)',
+		tableBorder: 'var(--midgray)',
 		highlight: 'yellow',
-		highlightBackground: 'black',
+		highlightBackground: 'var(--black)',
 		error: 'red',
 		link: 'blue',
 	},
@@ -111,16 +108,12 @@ export const darkTheme = {
 	},
 	colors: {
 		background: 'var(--vdarkgray)',
-		background2: 'black',
+		background2: 'var(--black)',
 		text: 'var(--lightgray)',
-		text2: 'white',
-		featureBackground: 'var(--darkblue)',
-		featureBackground2: 'var(--middarkblue)',
-		featureBackgroundContrast: 'var(--lightgray)',
-		featureBackgroundContrast2: 'var(--lightgray)',
+		text2: 'var(--white)',
 		tableOddRowBackground: 'var(--darkgray)',
 		tableBorder: 'var(--midgray)',
-		highlight: 'black',
+		highlight: 'var(--black)',
 		highlightBackground: 'yellow',
 		error: 'red',
 		link: 'lightblue',

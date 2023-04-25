@@ -37,8 +37,8 @@ const Footer = styled.footer`
 	min-width: 90%;
 	z-index: 1;
 	padding: 10px;
-	background-color: ${props => props.theme.colors.featureBackground};
-	color: ${props => props.theme.colors.featureBackgroundContrast};
+	background-color: ${props => props.theme.colors.background2};
+	color: ${props => props.theme.colors.text2};
 	font-size: small;
 	text-align: center;
 	border-radius: 5px;

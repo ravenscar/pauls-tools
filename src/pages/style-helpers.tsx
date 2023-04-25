@@ -64,17 +64,15 @@ export const ButtonBase = styled.div`
 
 export const Button = styled.div<{selected?: boolean}>`
 	background-color: ${props =>
-		props.selected
-			? props.theme.colors.featureBackground2
-			: props.theme.colors.featureBackground};
+		props.selected ? props.theme.colors.text2 : props.theme.colors.text};
 	color: ${props =>
 		props.selected
-			? props.theme.colors.featureBackgroundContrast2
-			: props.theme.colors.featureBackgroundContrast};
+			? props.theme.colors.background2
+			: props.theme.colors.background};
 
 	&:hover {
-		background-color: ${props => props.theme.colors.featureBackgroundContrast2};
-		color: ${props => props.theme.colors.featureBackground2};
+		background-color: ${props => props.theme.colors.text2};
+		color: ${props => props.theme.colors.background2};
 	}
 
 	text-align: center;
