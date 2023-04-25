@@ -2,9 +2,10 @@ import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import Placeholder from './pages/page-placeholder';
 import Home from './pages/page-home';
-import Encoding from './pages/page-encoding';
+import Cases from './pages/page-cases';
 import Diff from './pages/page-diff';
 import Utils from './pages/page-utils';
+import Encoding from './pages/page-encoding';
 
 export type AppRoutes = Array<{
 	path: string;
@@ -32,6 +33,13 @@ export const routes: AppRoutes = [
 		path: '/utils',
 		display: 'Utils',
 		element: <Utils />,
+		isNav: true,
+		navValue: 100,
+	},
+	{
+		path: '/cases',
+		display: 'Cases',
+		element: <Cases />,
 		isNav: true,
 		navValue: 30,
 	},
