@@ -4,7 +4,7 @@ import {nanoid} from 'nanoid';
 import {Area, Button, Column, Heading, Row} from './style-helpers';
 import {useSerialize} from '../storage/cache';
 
-const Base64 = () => {
+const Encoding = () => {
 	const [b64Text, setB64Text] = React.useState(atob(''));
 	const [b64, setB64] = React.useState('');
 	const [badBase64, setBadBase64] = React.useState(false);
@@ -205,4 +205,4 @@ const Base64 = () => {
 	);
 };
 
-export default Base64;
+export default Encoding;

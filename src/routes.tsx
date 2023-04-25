@@ -2,7 +2,7 @@ import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import Placeholder from './pages/page-placeholder';
 import Home from './pages/page-home';
-import Text from './pages/page-text';
+import Encoding from './pages/page-encoding';
 import Diff from './pages/page-diff';
 
 export type AppRoutes = Array<{
@@ -14,9 +14,9 @@ export type AppRoutes = Array<{
 }>;
 export const routes: AppRoutes = [
 	{
-		path: '/text',
-		display: 'Text',
-		element: <Text />,
+		path: '/encodeing',
+		display: 'Encoding',
+		element: <Encoding />,
 		isNav: true,
 		navValue: 10,
 	},

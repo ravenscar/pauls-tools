@@ -6,8 +6,8 @@ import {Button} from '../style-helpers';
 import {parseModes, type ParseMode} from './util';
 
 const Container = styled.div`
-	display: grid;
-	gap: 10px;
+	display: flex;
+	margin: auto;
 `;
 export const ParseModeButtons = ({
 	parseMode,

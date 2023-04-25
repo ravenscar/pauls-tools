@@ -1,40 +1,13 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import {useSerialize} from '../../storage/cache';
-import {Area} from '../style-helpers';
+import {Area, Column, Row} from '../style-helpers';
 import {DiffViewerWrapper} from './diff-viewer-wrapper';
 import {ParseModeButtons} from './parse-mode-buttons';
 import {prismHighlightSyntax} from './prism-highlight-syntax';
 import {parseLanguageString, type ParseMode, parseModes} from './util';
 
-const Container = styled.div`
-	display: grid;
-	grid-template-columns: auto 1fr 1fr;
-	grid-template-rows: 1fr 1fr;
-	gap: 10px;
-	min-height: 100%;
-`;
-
-const Selection = styled.div`
-	display: grid;
-	grid-row: span 2;
-	align-items: baseline;
-`;
-
-const Old = styled.div`
-	display: grid;
-	justify-items: stretch;
-`;
-
-const New = styled.div`
-	display: grid;
-	justify-items: stretch;
-`;
-
 const Output = styled.div`
-	display: grid;
-	grid-column: span 2;
-	justify-items: stretch;
 	overflow: scroll;
 `;
 
@@ -66,26 +39,28 @@ const Base64 = () => {
 		);
 
 	return (
-		<Container>
-			<Selection>
+		<Column>
+			<Row>
 				<ParseModeButtons parseMode={parseMode} setParseMode={setParseMode} />
-			</Selection>
-			<Old>
+			</Row>
+			<Row>
 				<Area
+					flex={1}
+					min-height='200px'
 					onChange={evt => {
 						setOldIn(evt.target.value);
 					}}
 					value={oldIn}
 				/>
-			</Old>
-			<New>
 				<Area
+					flex={1}
+					min-height='200px'
 					onChange={evt => {
 						setNewIn(evt.target.value);
 					}}
 					value={newIn}
 				/>
-			</New>
+			</Row>
 			<Output>
 				<DiffViewerWrapper
 					oldValue={parsedOldIn}
@@ -93,7 +68,7 @@ const Base64 = () => {
 					renderContent={highlightSyntax}
 				/>
 			</Output>
-		</Container>
+		</Column>
 	);
 };
 
