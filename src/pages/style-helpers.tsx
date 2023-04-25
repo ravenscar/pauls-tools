@@ -1,63 +1,40 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div<{vertStretch?: boolean}>`
-	display: grid;
-	grid-template-columns: repeat(12, 1fr);
-	grid-gap: 10px;
-	min-height: 100%;
-	align-content: ${props => (props.vertStretch ? 'stretch' : 'baseline')};
+export const Column = styled.div<{flex?: number}>`
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	${props => (props['flex'] ? `flex: ${props['flex']};` : '')}
+`;
+
+export const Row = styled.div<{flex?: number}>`
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	${props => (props['flex'] ? `flex: ${props['flex']};` : '')}
+`;
+
+export const Cell = styled.div<{flex?: number}>`
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	${props => (props['flex'] ? `flex: ${props['flex']};` : '')}
 `;
 
 export const Bad = styled.span`
 	color: ${props => props.theme.colors.error};
 `;
 
-export const Full = styled.div`
-	display: grid;
-	grid-column-end: span 12;
-	justify-items: stretch;
-	overflow: scroll;
-`;
-
-export const Half = styled.div`
-	display: grid;
-	grid-column-end: span 6;
-	justify-items: stretch;
-`;
-
-export const Third = styled.div`
-	display: grid;
-	grid-column-end: span 4;
-	justify-items: stretch;
-`;
-
-export const Quarter = styled.div`
-	display: grid;
-	grid-column-end: span 3;
-	justify-content: stretch;
-`;
-
-export const BigLeft = styled.div`
-	display: grid;
-	grid-template-columns: 1fr auto;
-	justify-items: stretch;
-`;
-export const BigRight = styled.div`
-	display: grid;
-	grid-template-columns: auto 1fr;
-	justify-items: stretch;
-`;
-
-export const Area = styled.textarea<{'min-height'?: string}>`
+export const Area = styled.textarea<{'min-height'?: string; flex?: number}>`
 	resize: none;
 	tab-size: 2;
-	${props => (props['min-height'] ? `min-height: ${props['min-height']}` : '')}
+	${props => (props['min-height'] ? `min-height: ${props['min-height']};` : '')}
+	${props => (props['flex'] ? `flex: ${props['flex']};` : '')}
 `;
 
 export const ButtonBase = styled.div`
 	text-align: center;
 	padding: 10px;
-	border-radius: 5px;
 	border: 10px;
 	cursor: pointer;
 `;
@@ -77,7 +54,6 @@ export const Button = styled.div<{selected?: boolean}>`
 
 	text-align: center;
 	padding: 10px;
-	border-radius: 5px;
 	border: 10px;
 	cursor: pointer;
 `;

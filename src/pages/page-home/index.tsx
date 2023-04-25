@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from '@emotion/styled';
 
-import {Area, BigRight, Button, Container, Half} from '../style-helpers';
+import {Area, Button, Column} from '../style-helpers';
 
 import {AddTodoForm} from './todo/add-todo-form';
 import {TodoList} from './todo/todo-list';
@@ -9,7 +9,7 @@ import {purgeCompletedTodos, Todo} from '../../storage/todos';
 import {useEditorFilelist} from '../../storage/editor';
 import {FilePlus, Save} from 'react-feather';
 
-const Page = styled(BigRight)`
+const Page = styled.div`
 	min-height: 100%;
 `;
 
@@ -39,7 +39,7 @@ const NoteControls = styled.div`
 	min-height: 100px;
 `;
 
-const EditorForm = styled(Half)`
+const EditorForm = styled.div`
 	grid-template-rows: auto 1fr;
 `;
 
@@ -64,7 +64,7 @@ const Home = () => {
 					</Button>
 				))}
 			</Sidebar>
-			<Container vertStretch={true}>
+			<Column>
 				<EditorForm>
 					<NoteControls>
 						<input />
@@ -73,7 +73,7 @@ const Home = () => {
 					</NoteControls>
 					<Area />
 				</EditorForm>
-				<Half>
+				<div>
 					<Todos>
 						<AddTodoForm
 							updateTodo={selected}
@@ -82,8 +82,8 @@ const Home = () => {
 						<TodoList selected={setSelected} />
 						<Cleanup onClick={purge}>🗑️</Cleanup>
 					</Todos>
-				</Half>
-			</Container>
+				</div>
+			</Column>
 		</Page>
 	);
 };

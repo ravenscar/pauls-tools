@@ -6,21 +6,16 @@ import {authedLinks} from '../routes';
 import {Button} from '../pages/style-helpers';
 
 const Nav = styled.nav`
-	display: grid;
-	grid-area: header;
-	grid-template-areas: 'nav spacing settings';
+	display: flex;
 	background-color: ${props => props.theme.colors.background2};
 	padding: 10px;
-`;
-
-const NavRow = styled.div`
-	grid-area: nav;
-	margin-top: auto;
-	margin-bottom: auto;
-	padding: 0;
+	flex-direction: row;
+	gap: 20px;
 `;
 
 const StyledNavLink = styled(NavLink)`
+	margin-top: auto;
+	margin-bottom: auto;
 	color: ${props => props.theme.colors.text2};
 	text-align: center;
 	text-decoration: none;
@@ -29,12 +24,16 @@ const StyledNavLink = styled(NavLink)`
 		color: ${props => props.theme.colors.link};
 	}
 	&.active {
+		text-decoration: underline;
 	}
 `;
 
-const DarkmodeToggle = styled(Button)`
-	grid-area: settings;
+const LeftPadding = styled.div`
 	margin-left: auto;
+`;
+
+const DarkModeToggle = styled(Button)`
+	margin-left: 50px;
 `;
 
 type Props = {
@@ -44,13 +43,12 @@ type Props = {
 
 export const NavigationBar = (props: Props) => (
 	<Nav id={props.id}>
-		<NavRow>
-			{authedLinks.map(({path, display}) => (
-				<StyledNavLink to={path} key={path}>
-					{display}
-				</StyledNavLink>
-			))}
-		</NavRow>
-		<DarkmodeToggle onClick={props.toggleDarkmode}>🌞 / 🌙</DarkmodeToggle>
+		<LeftPadding />
+		{authedLinks.map(({path, display}) => (
+			<StyledNavLink to={path} key={path}>
+				{display}
+			</StyledNavLink>
+		))}
+		<DarkModeToggle onClick={props.toggleDarkmode}>🌞 / 🌙</DarkModeToggle>
 	</Nav>
 );

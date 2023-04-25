@@ -1,8 +1,7 @@
-import styled from '@emotion/styled';
 import React from 'react';
 import {v4} from 'uuid';
 import {nanoid} from 'nanoid';
-import {Area, BigLeft, Button, Container, Half, Quarter} from './style-helpers';
+import {Area, Button, Column, Row} from './style-helpers';
 import {useSerialize} from '../storage/cache';
 
 const Base64 = () => {
@@ -133,71 +132,73 @@ const Base64 = () => {
 	};
 
 	return (
-		<Container>
-			<Half>
+		<Column>
+			<Row>
 				<Area
+					flex={1}
 					placeholder='text'
 					min-height='200px'
 					onChange={handleB64TextChange}
 					value={b64Text}
 				/>
-			</Half>
-			<Half>
 				<Area
+					flex={1}
 					placeholder='b64 encoded'
 					min-height='200px'
 					onChange={handleB64Change}
 					value={b64}
 				/>
-			</Half>
+			</Row>
 
-			<Half>
+			<Row>
 				<Area
+					flex={1}
 					placeholder='text'
 					min-height='200px'
 					onChange={handleHexTextChange}
 					value={hexText}
 				/>
-			</Half>
-			<Half>
 				<Area
+					flex={1}
 					placeholder='hex encoded'
 					min-height='200px'
 					onChange={handleHexChange}
 					value={hex}
 				/>
-			</Half>
+			</Row>
 
-			<Half>
+			<Row>
 				<Area
+					flex={1}
 					placeholder='jwt'
 					min-height='300px'
 					onChange={handleJotChange}
 					value={jot}
 				/>
-			</Half>
-			<Half>
 				<Area
+					flex={1}
 					placeholder='props'
 					min-height='300px'
 					onChange={handleJotPropsChange}
 					value={jotProps}
 				/>
-			</Half>
+			</Row>
 
-			<Quarter>
-				<BigLeft>
-					<Area readOnly value={uuid} />
-					<Button onClick={handleUuid}>UUID + copy</Button>
-				</BigLeft>
-			</Quarter>
-			<Quarter>
-				<BigLeft>
-					<Area readOnly value={nanoId} />
-					<Button onClick={handleNanoId}>Nano ID + copy</Button>
-				</BigLeft>
-			</Quarter>
-		</Container>
+			<Row>
+				<Column flex={1}>
+					<Row>
+						<Area readOnly value={uuid} flex={1} />
+						<Button onClick={handleUuid}>UUID + copy</Button>
+					</Row>
+				</Column>
+				<Column flex={1}>
+					<Row>
+						<Area readOnly value={nanoId} flex={1} />
+						<Button onClick={handleNanoId}>Nano ID + copy</Button>
+					</Row>
+				</Column>
+			</Row>
+		</Column>
 	);
 };
 
