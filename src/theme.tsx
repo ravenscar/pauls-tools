@@ -6,8 +6,11 @@ export const getGlobalStyles = (theme: Theme) => css`
 		--yellow: #ffc600;
 		--black: #000000;
 		--gray: rgb(200, 200, 200);
-		--darkgray: rgb(50, 50, 50);
-		--midgray: rgb(100, 100, 100);
+		--vdarkgray: rgb(31, 31, 31);
+		--darkgray: rgb(63, 63, 63);
+		--midgray: rgb(127, 127, 127);
+		--lightgray: rgb(191, 191, 191);
+		--vlightgray: rgb(223, 223, 223);
 
 		--lightblue: rgb(135, 185, 200);
 		--midlightblue: rgb(75, 125, 200);
@@ -71,10 +74,11 @@ export const getGlobalStyles = (theme: Theme) => css`
 	}
 
 	textarea {
-		background-color: ${theme.colors.background};
+		background-color: ${theme.colors.background2};
 		color: ${theme.colors.text};
-		border-color: ${theme.colors.tableBorder};
 		tab-size: 2;
+		border: 1px solid ${theme.colors.tableBorder};
+		padding: 5px;
 	}
 `;
 
@@ -83,7 +87,8 @@ export const lightTheme = {
 		isDark: false,
 	},
 	colors: {
-		background: 'white',
+		background: 'var(--vlightgray)',
+		background2: 'white',
 		text: 'var(--black)',
 		featureBackground: 'var(--lightblue)',
 		featureBackground2: 'var(--midlightblue)',
@@ -105,7 +110,8 @@ export const darkTheme = {
 		isDark: true,
 	},
 	colors: {
-		background: 'black',
+		background: 'var(--vdarkgray)',
+		background2: 'black',
 		text: 'var(--gray);',
 		featureBackground: 'var(--darkblue)',
 		featureBackground2: 'var(--middarkblue)',
