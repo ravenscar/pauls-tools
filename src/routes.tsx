@@ -4,6 +4,7 @@ import Placeholder from './pages/page-placeholder';
 import Home from './pages/page-home';
 import Encoding from './pages/page-encoding';
 import Diff from './pages/page-diff';
+import Utils from './pages/page-utils';
 
 export type AppRoutes = Array<{
 	path: string;
@@ -14,7 +15,7 @@ export type AppRoutes = Array<{
 }>;
 export const routes: AppRoutes = [
 	{
-		path: '/encodeing',
+		path: '/encoding',
 		display: 'Encoding',
 		element: <Encoding />,
 		isNav: true,
@@ -26,6 +27,13 @@ export const routes: AppRoutes = [
 		element: <Diff />,
 		isNav: true,
 		navValue: 20,
+	},
+	{
+		path: '/utils',
+		display: 'Utils',
+		element: <Utils />,
+		isNav: true,
+		navValue: 30,
 	},
 	{
 		path: '/developer',
