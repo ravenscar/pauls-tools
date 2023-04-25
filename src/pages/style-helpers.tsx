@@ -32,6 +32,10 @@ export const Area = styled.textarea<{'min-height'?: string; flex?: number}>`
 	${props => (props['flex'] ? `flex: ${props['flex']};` : '')}
 `;
 
+export const Heading = styled.h1`
+	margin: auto;
+`;
+
 export const ButtonBase = styled.div`
 	text-align: center;
 	padding: 10px;

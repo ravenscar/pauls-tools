@@ -1,7 +1,7 @@
 import React from 'react';
 import {v4} from 'uuid';
 import {nanoid} from 'nanoid';
-import {Area, Button, Column, Row} from './style-helpers';
+import {Area, Button, Column, Heading, Row} from './style-helpers';
 import {useSerialize} from '../storage/cache';
 
 const Base64 = () => {
@@ -133,6 +133,7 @@ const Base64 = () => {
 
 	return (
 		<Column>
+			<Heading>Text to Base64</Heading>
 			<Row>
 				<Area
 					flex={1}
@@ -150,6 +151,7 @@ const Base64 = () => {
 				/>
 			</Row>
 
+			<Heading>Text to Hex</Heading>
 			<Row>
 				<Area
 					flex={1}
@@ -167,6 +169,7 @@ const Base64 = () => {
 				/>
 			</Row>
 
+			<Heading>Get JOT details</Heading>
 			<Row>
 				<Area
 					flex={1}

@@ -2,7 +2,7 @@ import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import Placeholder from './pages/page-placeholder';
 import Home from './pages/page-home';
-import Base64 from './pages/page-base64';
+import Text from './pages/page-text';
 import Diff from './pages/page-diff';
 
 export type AppRoutes = Array<{
@@ -14,9 +14,9 @@ export type AppRoutes = Array<{
 }>;
 export const routes: AppRoutes = [
 	{
-		path: '/base64',
-		display: 'Base64',
-		element: <Base64 />,
+		path: '/text',
+		display: 'Text',
+		element: <Text />,
 		isNav: true,
 		navValue: 10,
 	},
