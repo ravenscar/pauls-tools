@@ -1,20 +1,20 @@
 export const getParts = (raw: string) => {
-	const stripped = raw.replace(/\s/g, '');
-	if (stripped.length === 0) {
+	const trimmed = raw.trim();
+	if (trimmed.length === 0) {
 		return [];
 	}
 
 	// check if first char is non-alpha like _
-	const flMatch = stripped[0].match(/[A-Za-z]/);
+	const flMatch = trimmed[0].match(/[A-Za-z]/);
 
 	let prefix: string;
 	let meat: string;
 	if (!flMatch) {
-		prefix = stripped[0];
-		meat = stripped.slice(1);
+		prefix = trimmed[0];
+		meat = trimmed.slice(1);
 	} else {
 		prefix = '';
-		meat = stripped;
+		meat = trimmed;
 	}
 
 	let bits: string[];
@@ -23,6 +23,10 @@ export const getParts = (raw: string) => {
 		bits = meat.split('_');
 	} else if (meat.includes('-')) {
 		bits = meat.split('-');
+	} else if (meat.includes(' ')) {
+		bits = meat.split(' ');
+	} else if (meat.includes('/')) {
+		bits = meat.split('/');
 	} else if (meat.includes('.')) {
 		bits = meat.split('.');
 	} else {

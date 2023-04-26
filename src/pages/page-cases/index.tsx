@@ -16,6 +16,7 @@ export const Pre = styled.pre<{flex?: number}>`
 	text-align: center;
 	padding: 10px;
 	border: 1px solid ${props => props.theme.colors.tableBorder};
+	cursor: copy;
 	${props => (props['flex'] ? `flex: ${props['flex']};` : '')}
 	&:hover {
 		background-color: ${props => props.theme.colors.tableBorder};

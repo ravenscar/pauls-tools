@@ -3,6 +3,11 @@ import {v4} from 'uuid';
 import {nanoid} from 'nanoid';
 import {Area, Button, Column, Heading, Row} from './style-helpers';
 import {useSerialize} from '../storage/cache';
+import styled from '@emotion/styled';
+
+const CopyButton = styled(Button)`
+	cursor: copy;
+`;
 
 const Encoding = () => {
 	const [uuid, setUuid] = React.useState('');
@@ -36,13 +41,13 @@ const Encoding = () => {
 				<Column flex={1}>
 					<Row>
 						<Area readOnly value={uuid} flex={1} />
-						<Button onClick={handleUuid}>UUID + copy</Button>
+						<CopyButton onClick={handleUuid}>UUID + copy</CopyButton>
 					</Row>
 				</Column>
 				<Column flex={1}>
 					<Row>
 						<Area readOnly value={nanoId} flex={1} />
-						<Button onClick={handleNanoId}>Nano ID + copy</Button>
+						<CopyButton onClick={handleNanoId}>Nano ID + copy</CopyButton>
 					</Row>
 				</Column>
 			</Row>

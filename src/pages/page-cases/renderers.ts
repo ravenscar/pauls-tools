@@ -19,9 +19,10 @@ const snakeRenderer: TRenderer = parts => {
 
 const camelRenderer: TRenderer = parts => {
 	const upperParts = parts.map((p, i) => {
-		if (i === 0) {
+		if (!p || i === 0) {
 			return p;
 		}
+
 		const first = p[0].toUpperCase();
 		const rest = p.slice(1);
 
@@ -35,6 +36,10 @@ const camelRenderer: TRenderer = parts => {
 
 const pascalRenderer: TRenderer = parts => {
 	const upperParts = parts.map(p => {
+		if (!p) {
+			return p;
+		}
+
 		const first = p[0].toUpperCase();
 		const rest = p.slice(1);
 
@@ -83,6 +88,10 @@ const upperCase: TRenderer = parts => {
 
 const titleCase: TRenderer = parts => {
 	const upperParts = parts.map(p => {
+		if (!p) {
+			return p;
+		}
+
 		const first = p[0].toUpperCase();
 		const rest = p.slice(1);
 
