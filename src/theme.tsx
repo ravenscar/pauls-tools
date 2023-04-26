@@ -80,6 +80,13 @@ export const getGlobalStyles = (theme: Theme) => css`
 		border: 1px solid ${theme.colors.tableBorder};
 		padding: 5px;
 	}
+
+	input {
+		background-color: ${theme.colors.background2};
+		color: ${theme.colors.text};
+		border: 1px solid ${theme.colors.tableBorder};
+		padding: 5px;
+	}
 `;
 
 export const lightTheme = {

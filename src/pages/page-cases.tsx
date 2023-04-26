@@ -1,11 +1,29 @@
 import React, {useEffect} from 'react';
 import {Area, Column, Heading, Row} from './style-helpers';
 import {useSerialize} from '../storage/cache';
+import styled from '@emotion/styled';
 
 type TRenderer = (parts: string[]) => {
 	name: string;
 	value: string;
 };
+
+export const Input = styled.input<{flex?: number}>`
+	font-size: 200%;
+	${props => (props['flex'] ? `flex: ${props['flex']};` : '')}
+`;
+
+export const Pre = styled.pre<{flex?: number}>`
+	font-size: 200%;
+	background-color: black;
+	text-align: center;
+	padding: 10px;
+	border: 1px solid ${props => props.theme.colors.tableBorder};
+	${props => (props['flex'] ? `flex: ${props['flex']};` : '')}
+	&:hover {
+		background-color: ${props => props.theme.colors.tableBorder};
+	}
+`;
 
 const kebabRenderer: TRenderer = parts => {
 	console.log('Parts: ', JSON.stringify(parts));
@@ -15,7 +33,15 @@ const kebabRenderer: TRenderer = parts => {
 	};
 };
 
-const renderers: TRenderer[] = [kebabRenderer];
+const snakeRenderer: TRenderer = parts => {
+	console.log('Parts: ', JSON.stringify(parts));
+	return {
+		name: 'snake_case',
+		value: parts.join('_'),
+	};
+};
+
+const renderers: TRenderer[] = [kebabRenderer, snakeRenderer];
 
 const Cases = () => {
 	const [raw, setRaw] = React.useState('');
@@ -74,15 +100,22 @@ const Cases = () => {
 		<Column>
 			<Heading>Change Cases</Heading>
 			<Row>
-				<Area value={raw} flex={1} onChange={e => setRaw(e.target.value)} />
+				<Input value={raw} flex={1} onChange={e => setRaw(e.target.value)} />
 			</Row>
-			<Row>{parts.join(' ')}</Row>
+			<Case name='parts' value={parts.join(' ')} />
 			{renderers.map(r => {
 				const result = r(parts);
-				return <Row key={result.name}>{result.value}</Row>;
+				return <Case key={result.name} {...result} />;
 			})}
 		</Column>
 	);
 };
+
+const Case = ({name, value}: {name: string; value: string}) => (
+	<>
+		<p>{name}:</p>
+		<Pre onClick={() => navigator.clipboard.writeText(value)}>{value}</Pre>
+	</>
+);
 
 export default Cases;
