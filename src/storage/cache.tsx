@@ -40,16 +40,15 @@ export const useSerialize = <
 	setters: S,
 ) => {
 	type Serialized = Record<string, any>;
-
 	const serializeRef = React.useRef<Serialized>();
+	const [initialized, setInitialized] = React.useState(false);
 
 	React.useEffect(() => {
 		serializeRef.current = getters;
 	}, Object.values(getters));
 
-	// mount / unmount serialization;
+	// serialize on change
 	React.useEffect(() => {
-		let loaded = false;
 		const load = async () => {
 			const item = (await getCacheItem(path)) as
 				| Partial<Serialized>
@@ -74,20 +73,21 @@ export const useSerialize = <
 					}
 				}
 			}
-			loaded = true;
 		};
 
-		load();
-
-		// save via ref on cleanup, if loading finished.
-		return () => {
+		const save = async () => {
 			const state = serializeRef.current;
-			if (loaded && state) {
-				const save = async () => {
-					await setCacheItem(path, state);
-				};
-				save();
+			if (state) {
+				await setCacheItem(path, state);
 			}
 		};
-	}, []);
+
+		if (!initialized) {
+			// skip first render as we are loading
+			load();
+			setInitialized(true);
+		} else {
+			save();
+		}
+	}, Object.values(getters));
 };
