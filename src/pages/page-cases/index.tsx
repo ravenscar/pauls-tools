@@ -12,7 +12,7 @@ export const Input = styled.input<{flex?: number}>`
 
 export const Pre = styled.pre<{flex?: number}>`
 	font-size: 150%;
-	background-color: black;
+	background-color: ${props => props.theme.colors.background2};
 	text-align: center;
 	padding: 10px;
 	border: 1px solid ${props => props.theme.colors.tableBorder};

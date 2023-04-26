@@ -1,0 +1,6 @@
+add error messages on encoding page
+split larger components into state/presentational
+split todo/snippets into separate pages
+implement todo areas
+implenet loading/saving of snippets
+add import/export

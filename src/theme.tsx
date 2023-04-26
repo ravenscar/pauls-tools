@@ -96,8 +96,8 @@ export const lightTheme = {
 	colors: {
 		background: 'var(--vlightgray)',
 		background2: 'var(--white)',
-		text: 'var(--darkgray)',
-		text2: 'var(--black)',
+		text: 'var(--black)',
+		text2: 'var(--darkgray)',
 		tableOddRowBackground: 'var(--lightgray)',
 		tableBorder: 'var(--midgray)',
 		highlight: 'yellow',
@@ -116,8 +116,8 @@ export const darkTheme = {
 	colors: {
 		background: 'var(--vdarkgray)',
 		background2: 'var(--black)',
-		text: 'var(--lightgray)',
-		text2: 'var(--white)',
+		text: 'var(--white)',
+		text2: 'var(--lightgray)',
 		tableOddRowBackground: 'var(--darkgray)',
 		tableBorder: 'var(--midgray)',
 		highlight: 'var(--black)',
