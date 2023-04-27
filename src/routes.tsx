@@ -1,11 +1,12 @@
 import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import Placeholder from './pages/page-placeholder';
-import Home from './pages/page-home';
+import Todos from './pages/page-todos';
 import Cases from './pages/page-cases';
 import Diff from './pages/page-diff';
 import Utils from './pages/page-utils';
 import Converters from './pages/page-converters';
+import Snippets from './pages/page-snippets';
 
 export type AppRoutes = Array<{
 	path: string;
@@ -15,6 +16,13 @@ export type AppRoutes = Array<{
 	navValue: number; // Lesser values ordered left in navBar
 }>;
 export const routes: AppRoutes = [
+	{
+		path: '/snippets',
+		display: 'Snippets',
+		element: <Snippets />,
+		isNav: true,
+		navValue: 5,
+	},
 	{
 		path: '/converters',
 		display: 'Converters',
@@ -66,8 +74,8 @@ export const routes: AppRoutes = [
 	},
 	{
 		path: '/',
-		display: 'Home',
-		element: <Home />,
+		display: 'Todo',
+		element: <Todos />,
 		isNav: true,
 		navValue: 0,
 	},

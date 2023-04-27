@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import {Priority} from '../../../storage/todos';
+import {Priority} from '../../storage/todos';
 
 const StyledPriority = styled.div`
 	display: flex;

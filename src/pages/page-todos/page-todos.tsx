@@ -1,24 +1,16 @@
 import React, {useState} from 'react';
 import styled from '@emotion/styled';
 
-import {Area, Button, Column} from '../style-helpers';
+import {Column} from '../style-helpers';
 
-import {AddTodoForm} from './todo/add-todo-form';
-import {TodoList} from './todo/todo-list';
+import {AddTodoForm} from './add-todo-form';
+import {TodoList} from './todo-list';
 import {purgeCompletedTodos, Todo} from '../../storage/todos';
-import {useEditorFilelist} from '../../storage/editor';
-import {FilePlus, Save} from 'react-feather';
 
 const Page = styled.div`
 	min-height: 100%;
 `;
 
-const Sidebar = styled.div`
-	display: grid;
-	grid-gap: 20px;
-	margin-right: 20px;
-	align-content: baseline;
-`;
 const Todos = styled.div`
 	display: grid;
 	grid-gap: 20px;
@@ -34,19 +26,8 @@ const Cleanup = styled.div`
 	align-self: end;
 `;
 
-const NoteControls = styled.div`
-	background-color: red;
-	min-height: 100px;
-`;
-
-const EditorForm = styled.div`
-	grid-template-rows: auto 1fr;
-`;
-
-const Home = () => {
+export const PageTodos = () => {
 	const [selected, setSelected] = useState<Todo | undefined>();
-	const [editorContent, setEditorContent] = useState('');
-	const files = useEditorFilelist();
 
 	const purge = async () => {
 		await purgeCompletedTodos();
@@ -57,22 +38,7 @@ const Home = () => {
 
 	return (
 		<Page>
-			<Sidebar>
-				{files?.map(file => (
-					<Button key={file.id}>
-						<code>{file.title}</code>
-					</Button>
-				))}
-			</Sidebar>
 			<Column>
-				<EditorForm>
-					<NoteControls>
-						<input />
-						<Save />
-						<FilePlus />
-					</NoteControls>
-					<Area />
-				</EditorForm>
 				<div>
 					<Todos>
 						<AddTodoForm
@@ -87,5 +53,3 @@ const Home = () => {
 		</Page>
 	);
 };
-
-export default Home;

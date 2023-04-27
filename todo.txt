@@ -1,5 +1,3 @@
-split larger components into state/presentational
-split todo/snippets into separate pages
-implement todo areas
-implenet loading/saving of snippets
+implement todo areas / drag drop
+implement loading/saving of snippets
 add import/export
