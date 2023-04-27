@@ -2,6 +2,35 @@ import React from 'react';
 import {Area, Column, Heading, Row} from './style-helpers';
 import {useSerialize} from '../storage/cache';
 
+const Converter = (props: {
+	heading: string;
+	error?: any;
+	srcValue: string;
+	onChangeSrc?: React.ChangeEventHandler<HTMLTextAreaElement>;
+	destValue: string;
+	onChangeDest?: React.ChangeEventHandler<HTMLTextAreaElement>;
+}) => (
+	<>
+		<Heading>{props.heading}</Heading>
+		<Row>
+			<Area
+				flex={1}
+				placeholder='source'
+				min-height='200px'
+				onChange={props.onChangeSrc}
+				value={props.srcValue}
+			/>
+			<Area
+				flex={1}
+				placeholder='destination'
+				min-height='200px'
+				onChange={props.onChangeDest}
+				value={props.destValue}
+			/>
+		</Row>
+	</>
+);
+
 const Converters = () => {
 	const [b64Text, setB64Text] = React.useState(atob(''));
 	const [b64, setB64] = React.useState('');
@@ -114,59 +143,33 @@ const Converters = () => {
 
 	return (
 		<Column>
-			<Heading>Text to Base64</Heading>
-			<Row>
-				<Area
-					flex={1}
-					placeholder='text'
-					min-height='200px'
-					onChange={handleB64TextChange}
-					value={b64Text}
-				/>
-				<Area
-					flex={1}
-					placeholder='b64 encoded'
-					min-height='200px'
-					onChange={handleB64Change}
-					value={b64}
-				/>
-			</Row>
-
-			<Heading>Text to Hex</Heading>
-			<Row>
-				<Area
-					flex={1}
-					placeholder='text'
-					min-height='200px'
-					onChange={handleHexTextChange}
-					value={hexText}
-				/>
-				<Area
-					flex={1}
-					placeholder='hex encoded'
-					min-height='200px'
-					onChange={handleHexChange}
-					value={hex}
-				/>
-			</Row>
-
-			<Heading>Get JOT details</Heading>
-			<Row>
-				<Area
-					flex={1}
-					placeholder='jwt'
-					min-height='300px'
-					onChange={handleJotChange}
-					value={jot}
-				/>
-				<Area
-					flex={1}
-					placeholder='props'
-					min-height='300px'
-					onChange={handleJotPropsChange}
-					value={jotProps}
-				/>
-			</Row>
+			<Converter
+				{...{
+					heading: 'Text to Base64',
+					srcValue: b64Text,
+					destValue: b64,
+					onChangeSrc: handleB64TextChange,
+					onChangeDest: handleB64Change,
+				}}
+			/>
+			<Converter
+				{...{
+					heading: 'Text to Hex',
+					srcValue: hexText,
+					destValue: hex,
+					onChangeSrc: handleHexTextChange,
+					onChangeDest: handleHexChange,
+				}}
+			/>
+			<Converter
+				{...{
+					heading: 'Decode JOT',
+					srcValue: jot,
+					destValue: jotProps,
+					onChangeSrc: handleJotChange,
+					onChangeDest: handleJotPropsChange,
+				}}
+			/>
 		</Column>
 	);
 };
