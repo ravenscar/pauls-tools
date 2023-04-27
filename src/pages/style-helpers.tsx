@@ -36,6 +36,11 @@ export const Heading = styled.h1`
 	margin: auto;
 `;
 
+export const Error = styled.div`
+	flex: 1;
+	background-color: ${props => props.theme.colors.error};
+`;
+
 export const ButtonBase = styled.div`
 	text-align: center;
 	padding: 10px;

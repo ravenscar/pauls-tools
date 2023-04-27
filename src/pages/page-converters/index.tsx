@@ -1,5 +1,5 @@
 import React from 'react';
-import {Area, Column, Heading, Row} from '../style-helpers';
+import {Area, Column, Error, Heading, Row} from '../style-helpers';
 import {useSerialize} from '../../storage/cache';
 import {convertFromHex, convertToHex} from './util';
 import {useConverter} from './useConverter';
@@ -30,6 +30,7 @@ const Converter = (props: {
 				value={props.destValue}
 			/>
 		</Row>
+		{props.error && <Error>↑ {props.error}</Error>}
 	</>
 );
 
@@ -39,16 +40,16 @@ const Converters = () => {
 			(newValue, setSrc, setDest, setErr) => {
 				setSrc(newValue);
 				setDest(btoa(newValue));
-				setErr(false);
+				setErr(undefined);
 			},
 
 			(newValue, setSrc, setDest, setErr) => {
 				setDest(newValue);
 				try {
 					setSrc(atob(newValue));
-					setErr(false);
+					setErr(undefined);
 				} catch {
-					setErr(true);
+					setErr("Couldn't parse b64");
 				}
 			},
 		);
@@ -58,16 +59,16 @@ const Converters = () => {
 			(newValue, setSrc, setDest, setErr) => {
 				setSrc(newValue);
 				setDest(convertToHex(newValue));
-				setErr(false);
+				setErr(undefined);
 			},
 
 			(newValue, setSrc, setDest, setErr) => {
 				setDest(newValue);
 				try {
 					setSrc(convertFromHex(newValue));
-					setErr(false);
+					setErr(undefined);
 				} catch {
-					setErr(true);
+					setErr("Couldn't parse hex");
 				}
 			},
 		);
@@ -81,10 +82,10 @@ const Converters = () => {
 					const decoded = atob(meat);
 					const parsed = JSON.parse(decoded);
 					setDest(JSON.stringify(parsed, null, 2));
-					setErr(false);
+					setErr(undefined);
 				} catch {
 					setDest('');
-					setErr(true);
+					setErr("Couldn't parse JOT");
 				}
 			},
 
@@ -120,6 +121,7 @@ const Converters = () => {
 					heading: 'Text to Base64',
 					srcValue: b64Src,
 					destValue: b64Dest,
+					error: b64Err,
 					onChangeSrc: e => onChangeB64Src(e.target.value),
 					onChangeDest: e => onChangeB64Dest(e.target.value),
 				}}
@@ -129,6 +131,7 @@ const Converters = () => {
 					heading: 'Text to Hex',
 					srcValue: hexSrc,
 					destValue: hexDest,
+					error: hexErr,
 					onChangeSrc: e => onChangeHexSrc(e.target.value),
 					onChangeDest: e => onChangeHexDest(e.target.value),
 				}}
@@ -138,6 +141,7 @@ const Converters = () => {
 					heading: 'Decode JOT',
 					srcValue: jotSrc,
 					destValue: jotDest,
+					error: jotErr,
 					onChangeSrc: e => onChangeJotSrc(e.target.value),
 					onChangeDest: e => onChangeJotDest(e.target.value),
 				}}
