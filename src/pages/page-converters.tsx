@@ -32,46 +32,53 @@ const Converter = (props: {
 );
 
 const Converters = () => {
-	const [b64Text, setB64Text] = React.useState(atob(''));
-	const [b64, setB64] = React.useState('');
-	const [badBase64, setBadBase64] = React.useState(false);
+	const [b64Src, setB64Src] = React.useState(atob(''));
+	const [b64Dest, setB64Dest] = React.useState('');
+	const [b64Err, setB64Err] = React.useState(false);
 
-	const [hexText, setHexText] = React.useState(atob(''));
-	const [hex, setHex] = React.useState('');
-	const [badHex, setBadHex] = React.useState(false);
+	const [hexSrc, setHexSrc] = React.useState(atob(''));
+	const [hexDest, setHexDest] = React.useState('');
+	const [hexErr, setHexErr] = React.useState(false);
 
-	const [jot, setJot] = React.useState('');
-	const [jotProps, setJotProps] = React.useState('');
-	const [badJot, setBadJot] = React.useState(false);
+	const [jotSrc, setJotSrc] = React.useState('');
+	const [jotDest, setJotDest] = React.useState('');
+	const [jotErr, setJotErr] = React.useState(false);
 
 	useSerialize(
 		'/converters',
-		{b64Text, b64, hexText, hex, jot, jotProps},
 		{
-			b64Text: setB64Text,
-			b64: setB64,
-			hexText: setHexText,
-			hex: setHex,
-			jot: setJot,
-			jotProps: setJotProps,
+			b64Text: b64Src,
+			b64: b64Dest,
+			hexText: hexSrc,
+			hex: hexDest,
+			jot: jotSrc,
+			jotProps: jotDest,
+		},
+		{
+			b64Text: setB64Src,
+			b64: setB64Dest,
+			hexText: setHexSrc,
+			hex: setHexDest,
+			jot: setJotSrc,
+			jotProps: setJotDest,
 		},
 	);
 
-	const handleB64TextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+	const handleB64SrcChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		const val = e.target.value;
-		setB64Text(val);
-		setB64(btoa(val));
-		setBadBase64(false);
+		setB64Src(val);
+		setB64Dest(btoa(val));
+		setB64Err(false);
 	};
 
-	const handleB64Change = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+	const handleB64DestChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		const val = e.target.value;
-		setB64(val);
+		setB64Dest(val);
 		try {
-			setB64Text(atob(val));
-			setBadBase64(false);
+			setB64Src(atob(val));
+			setB64Err(false);
 		} catch {
-			setBadBase64(true);
+			setB64Err(true);
 		}
 	};
 
@@ -103,42 +110,42 @@ const Converters = () => {
 		return output;
 	};
 
-	const handleHexTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+	const handleHexSrcChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		const val = e.target.value;
-		setHexText(val);
-		setHex(convertToHex(val));
-		setBadHex(false);
+		setHexSrc(val);
+		setHexDest(convertToHex(val));
+		setHexErr(false);
 	};
 
-	const handleHexChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+	const handleHexDestChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		const val = e.target.value;
-		setHex(val);
+		setHexDest(val);
 		try {
-			setHexText(convertFromHex(val));
-			setBadHex(false);
+			setHexSrc(convertFromHex(val));
+			setHexErr(false);
 		} catch {
-			setBadHex(true);
+			setHexErr(true);
 		}
 	};
 
-	const handleJotChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+	const handleJotSrcChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		const val = e.target.value;
 		try {
-			setJot(val);
+			setJotSrc(val);
 			const [, meat] = val.split('.');
 			const decoded = atob(meat);
 			const parsed = JSON.parse(decoded);
-			setJotProps(JSON.stringify(parsed, null, 2));
-			setBadJot(false);
+			setJotDest(JSON.stringify(parsed, null, 2));
+			setJotErr(false);
 		} catch {
-			setJotProps('');
-			setBadJot(true);
+			setJotDest('');
+			setJotErr(true);
 		}
 	};
 
-	const handleJotPropsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+	const handleJotDestChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		const val = e.target.value;
-		setJotProps(val);
+		setJotDest(val);
 	};
 
 	return (
@@ -146,28 +153,28 @@ const Converters = () => {
 			<Converter
 				{...{
 					heading: 'Text to Base64',
-					srcValue: b64Text,
-					destValue: b64,
-					onChangeSrc: handleB64TextChange,
-					onChangeDest: handleB64Change,
+					srcValue: b64Src,
+					destValue: b64Dest,
+					onChangeSrc: handleB64SrcChange,
+					onChangeDest: handleB64DestChange,
 				}}
 			/>
 			<Converter
 				{...{
 					heading: 'Text to Hex',
-					srcValue: hexText,
-					destValue: hex,
-					onChangeSrc: handleHexTextChange,
-					onChangeDest: handleHexChange,
+					srcValue: hexSrc,
+					destValue: hexDest,
+					onChangeSrc: handleHexSrcChange,
+					onChangeDest: handleHexDestChange,
 				}}
 			/>
 			<Converter
 				{...{
 					heading: 'Decode JOT',
-					srcValue: jot,
-					destValue: jotProps,
-					onChangeSrc: handleJotChange,
-					onChangeDest: handleJotPropsChange,
+					srcValue: jotSrc,
+					destValue: jotDest,
+					onChangeSrc: handleJotSrcChange,
+					onChangeDest: handleJotDestChange,
 				}}
 			/>
 		</Column>
