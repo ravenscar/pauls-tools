@@ -3,13 +3,13 @@ import {useState} from 'react';
 type TConverter = (
 	handleSrcChange: TChangeHandler,
 	handleDestChange: TChangeHandler,
-) => [
-	string,
-	string,
-	unknown,
-	(newValue: string) => void,
-	(newValue: string) => void,
-];
+) => {
+	src: string;
+	dest: string;
+	err: unknown;
+	onChangeSrc: (newValue: string) => void;
+	onChangeDest: (newValue: string) => void;
+};
 
 type TChangeHandler = (
 	newValue: string,
@@ -23,11 +23,12 @@ export const useConverter: TConverter = (handleSrcChange, handleDestChange) => {
 	const [dest, setDest] = useState('');
 	const [err, setErr] = useState<unknown>(undefined);
 
-	return [
+	return {
 		src,
 		dest,
 		err,
-		(val: string) => handleSrcChange(val, setSrc, setDest, setErr),
-		(val: string) => handleDestChange(val, setSrc, setDest, setErr),
-	];
+		onChangeSrc: (val: string) => handleSrcChange(val, setSrc, setDest, setErr),
+		onChangeDest: (val: string) =>
+			handleDestChange(val, setSrc, setDest, setErr),
+	};
 };
