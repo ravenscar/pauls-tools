@@ -53,13 +53,45 @@ const Converters = () => {
 			},
 		);
 
-	const [hexSrc, setHexSrc] = React.useState(atob(''));
-	const [hexDest, setHexDest] = React.useState('');
-	const [hexErr, setHexErr] = React.useState(false);
+	const [hexSrc, hexDest, hexErr, onChangeHexSrc, onChangeHexDest] =
+		useConverter(
+			(newValue, setSrc, setDest, setErr) => {
+				setSrc(newValue);
+				setDest(convertToHex(newValue));
+				setErr(false);
+			},
 
-	const [jotSrc, setJotSrc] = React.useState('');
-	const [jotDest, setJotDest] = React.useState('');
-	const [jotErr, setJotErr] = React.useState(false);
+			(newValue, setSrc, setDest, setErr) => {
+				setDest(newValue);
+				try {
+					setSrc(convertFromHex(newValue));
+					setErr(false);
+				} catch {
+					setErr(true);
+				}
+			},
+		);
+
+	const [jotSrc, jotDest, jotErr, onChangeJotSrc, onChangeJotDest] =
+		useConverter(
+			(newValue, setSrc, setDest, setErr) => {
+				try {
+					setSrc(newValue);
+					const [, meat] = newValue.split('.');
+					const decoded = atob(meat);
+					const parsed = JSON.parse(decoded);
+					setDest(JSON.stringify(parsed, null, 2));
+					setErr(false);
+				} catch {
+					setDest('');
+					setErr(true);
+				}
+			},
+
+			(newValue, setSrc, setDest, setErr) => {
+				setDest(newValue);
+			},
+		);
 
 	useSerialize(
 		'/converters',
@@ -74,46 +106,12 @@ const Converters = () => {
 		{
 			b64Text: onChangeB64Src,
 			b64: onChangeB64Dest,
-			hexText: setHexSrc,
-			hex: setHexDest,
-			jot: setJotSrc,
-			jotProps: setJotDest,
+			hexText: onChangeHexSrc,
+			hex: onChangeHexDest,
+			jot: onChangeJotSrc,
+			jotProps: onChangeJotDest,
 		},
 	);
-
-	const handleHexSrcChange = (val: string) => {
-		setHexSrc(val);
-		setHexDest(convertToHex(val));
-		setHexErr(false);
-	};
-
-	const handleHexDestChange = (val: string) => {
-		setHexDest(val);
-		try {
-			setHexSrc(convertFromHex(val));
-			setHexErr(false);
-		} catch {
-			setHexErr(true);
-		}
-	};
-
-	const handleJotSrcChange = (val: string) => {
-		try {
-			setJotSrc(val);
-			const [, meat] = val.split('.');
-			const decoded = atob(meat);
-			const parsed = JSON.parse(decoded);
-			setJotDest(JSON.stringify(parsed, null, 2));
-			setJotErr(false);
-		} catch {
-			setJotDest('');
-			setJotErr(true);
-		}
-	};
-
-	const handleJotDestChange = (val: string) => {
-		setJotDest(val);
-	};
 
 	return (
 		<Column>
@@ -131,8 +129,8 @@ const Converters = () => {
 					heading: 'Text to Hex',
 					srcValue: hexSrc,
 					destValue: hexDest,
-					onChangeSrc: e => handleHexSrcChange(e.target.value),
-					onChangeDest: e => handleHexDestChange(e.target.value),
+					onChangeSrc: e => onChangeHexSrc(e.target.value),
+					onChangeDest: e => onChangeHexDest(e.target.value),
 				}}
 			/>
 			<Converter
@@ -140,8 +138,8 @@ const Converters = () => {
 					heading: 'Decode JOT',
 					srcValue: jotSrc,
 					destValue: jotDest,
-					onChangeSrc: e => handleJotSrcChange(e.target.value),
-					onChangeDest: e => handleJotDestChange(e.target.value),
+					onChangeSrc: e => onChangeJotSrc(e.target.value),
+					onChangeDest: e => onChangeJotDest(e.target.value),
 				}}
 			/>
 		</Column>
