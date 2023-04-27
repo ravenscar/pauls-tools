@@ -1,5 +1,5 @@
 export const getParts = (raw: string) => {
-	const trimmed = raw.trim();
+	const trimmed = raw.trim().replace(/\s+/g, ' ');
 	if (trimmed.length === 0) {
 		return [];
 	}

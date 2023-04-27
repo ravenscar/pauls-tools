@@ -5,7 +5,7 @@ import Home from './pages/page-home';
 import Cases from './pages/page-cases';
 import Diff from './pages/page-diff';
 import Utils from './pages/page-utils';
-import Encoding from './pages/page-encoding';
+import Converters from './pages/page-converters';
 
 export type AppRoutes = Array<{
 	path: string;
@@ -16,9 +16,9 @@ export type AppRoutes = Array<{
 }>;
 export const routes: AppRoutes = [
 	{
-		path: '/encoding',
-		display: 'Encoding',
-		element: <Encoding />,
+		path: '/converters',
+		display: 'Converters',
+		element: <Converters />,
 		isNav: true,
 		navValue: 10,
 	},

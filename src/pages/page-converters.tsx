@@ -2,7 +2,7 @@ import React from 'react';
 import {Area, Column, Heading, Row} from './style-helpers';
 import {useSerialize} from '../storage/cache';
 
-const Encoding = () => {
+const Converters = () => {
 	const [b64Text, setB64Text] = React.useState(atob(''));
 	const [b64, setB64] = React.useState('');
 	const [badBase64, setBadBase64] = React.useState(false);
@@ -16,7 +16,7 @@ const Encoding = () => {
 	const [badJot, setBadJot] = React.useState(false);
 
 	useSerialize(
-		'/encoding',
+		'/converters',
 		{b64Text, b64, hexText, hex, jot, jotProps},
 		{
 			b64Text: setB64Text,
@@ -171,4 +171,4 @@ const Encoding = () => {
 	);
 };
 
-export default Encoding;
+export default Converters;
