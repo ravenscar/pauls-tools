@@ -1,9 +1,7 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Column, Heading, Row} from '../style-helpers';
-import {useSerialize} from '../../storage/cache';
 import styled from '@emotion/styled';
 import {renderers} from './renderers';
-import {getParts} from './util';
 
 export const Input = styled.input<{flex?: number}>`
 	font-size: 150%;
@@ -23,35 +21,24 @@ export const Pre = styled.pre<{flex?: number}>`
 	}
 `;
 
-const Cases = () => {
-	const [raw, setRaw] = React.useState('');
-	const [parts, setParts] = React.useState<string[]>([]);
-
-	useEffect(() => {
-		setParts(getParts(raw));
-	}, [raw]);
-
-	useSerialize(
-		'/cases',
-		{raw},
-		{
-			raw: setRaw,
-		},
-	);
-
-	return (
-		<Column>
-			<Heading>Change Cases</Heading>
-			<Row>
-				<Input value={raw} flex={1} onChange={e => setRaw(e.target.value)} />
-			</Row>
-			{renderers.map(r => {
-				const result = r(parts);
-				return <Case key={result.name} {...result} />;
-			})}
-		</Column>
-	);
+type TProps = {
+	input: string;
+	setInput: (value: string) => void;
+	parts: string[];
 };
+
+export const PageCasesPresentational = ({input, setInput, parts}: TProps) => (
+	<Column>
+		<Heading>Change Cases</Heading>
+		<Row>
+			<Input value={input} flex={1} onChange={e => setInput(e.target.value)} />
+		</Row>
+		{renderers.map(r => {
+			const result = r(parts);
+			return <Case key={result.name} {...result} />;
+		})}
+	</Column>
+);
 
 const Case = ({name, value}: {name: string; value: string}) => (
 	<>
@@ -59,5 +46,3 @@ const Case = ({name, value}: {name: string; value: string}) => (
 		<Pre onClick={() => navigator.clipboard.writeText(value)}>{value}</Pre>
 	</>
 );
-
-export default Cases;
