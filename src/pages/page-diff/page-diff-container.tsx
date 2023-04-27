@@ -1,17 +1,10 @@
-import styled from '@emotion/styled';
 import React from 'react';
 import {useSerialize} from '../../storage/cache';
-import {Area, Column, Row} from '../style-helpers';
-import {DiffViewerWrapper} from './diff-viewer-wrapper';
-import {ParseModeButtons} from './parse-mode-buttons';
 import {prismHighlightSyntax} from './prism-highlight-syntax';
 import {parseLanguageString, type ParseMode, parseModes} from './util';
+import {PageDiffPresentational} from './page-diff-presentational';
 
-const Output = styled.div`
-	overflow: scroll;
-`;
-
-const Base64 = () => {
+export const PageDiffContainer = () => {
 	const [oldIn, setOldIn] = React.useState<string>('');
 	const [newIn, setNewIn] = React.useState<string>('');
 	const [parsedOldIn, setParsedOldIn] = React.useState<string>('');
@@ -39,37 +32,18 @@ const Base64 = () => {
 		);
 
 	return (
-		<Column>
-			<Row>
-				<ParseModeButtons parseMode={parseMode} setParseMode={setParseMode} />
-			</Row>
-			<Row>
-				<Area
-					flex={1}
-					min-height='200px'
-					onChange={evt => {
-						setOldIn(evt.target.value);
-					}}
-					value={oldIn}
-				/>
-				<Area
-					flex={1}
-					min-height='200px'
-					onChange={evt => {
-						setNewIn(evt.target.value);
-					}}
-					value={newIn}
-				/>
-			</Row>
-			<Output>
-				<DiffViewerWrapper
-					oldValue={parsedOldIn}
-					newValue={parsedNewIn}
-					renderContent={highlightSyntax}
-				/>
-			</Output>
-		</Column>
+		<PageDiffPresentational
+			{...{
+				highlightSyntax,
+				newIn,
+				oldIn,
+				parsedNewIn,
+				parsedOldIn,
+				parseMode,
+				setParseMode,
+				setNewIn,
+				setOldIn,
+			}}
+		/>
 	);
 };
-
-export default Base64;
