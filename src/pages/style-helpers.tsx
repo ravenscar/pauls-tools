@@ -44,7 +44,6 @@ export const Error = styled.div`
 export const ButtonBase = styled.div`
 	text-align: center;
 	padding: 10px;
-	border: 10px;
 	cursor: pointer;
 `;
 
@@ -63,16 +62,12 @@ export const Button = styled.div<{selected?: boolean}>`
 
 	text-align: center;
 	padding: 10px;
-	border: 10px;
 	cursor: pointer;
 `;
-
 export const StealthButton = styled(ButtonBase)`
-	background-color: ${props => props.theme.colors.background};
-	color: ${props => props.theme.colors.text};
+	color: ${props => props.theme.colors.text2};
 
 	&:hover {
-		background-color: ${props => props.theme.colors.text};
-		color: ${props => props.theme.colors.background};
+		color: ${props => props.theme.colors.text};
 	}
 `;

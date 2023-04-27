@@ -15,7 +15,10 @@ import {PriorityBar} from './priority';
 import {useSerialize} from '../../storage/cache';
 
 const AddNoteContainer = styled.div`
-	display: grid;
+	display: flex;
+	flex: 1;
+	justify-content: center;
+	align-items: end;
 	grid-template-columns: auto auto;
 `;
 
@@ -37,15 +40,14 @@ const AddNoteArea = styled.textarea`
 
 const AddStickyNote = styled(StickyNote)`
 	justify-self: right;
-	min-width: 50%;
+	min-width: 600px;
+	min-height: 400px;
 	overflow: hidden;
 `;
 
 const Controls = styled.div`
-	justify-self: left;
-	align-self: end;
-	min-width: 0%;
-	margin-left: 10px;
+	float: left;
+	max-width: 0;
 `;
 export const AddTodoForm = ({
 	updateTodo,
