@@ -2,6 +2,7 @@ import React from 'react';
 import {Area, Column, Heading, Row} from '../style-helpers';
 import {useSerialize} from '../../storage/cache';
 import {convertFromHex, convertToHex} from './util';
+import {useConverter} from './useConverter';
 
 const Converter = (props: {
 	heading: string;
@@ -33,9 +34,24 @@ const Converter = (props: {
 );
 
 const Converters = () => {
-	const [b64Src, setB64Src] = React.useState(atob(''));
-	const [b64Dest, setB64Dest] = React.useState('');
-	const [b64Err, setB64Err] = React.useState(false);
+	const [b64Src, b64Dest, b64Err, onChangeB64Src, onChangeB64Dest] =
+		useConverter(
+			(newValue, setSrc, setDest, setErr) => {
+				setSrc(newValue);
+				setDest(btoa(newValue));
+				setErr(false);
+			},
+
+			(newValue, setSrc, setDest, setErr) => {
+				setDest(newValue);
+				try {
+					setSrc(atob(newValue));
+					setErr(false);
+				} catch {
+					setErr(true);
+				}
+			},
+		);
 
 	const [hexSrc, setHexSrc] = React.useState(atob(''));
 	const [hexDest, setHexDest] = React.useState('');
@@ -56,8 +72,8 @@ const Converters = () => {
 			jotProps: jotDest,
 		},
 		{
-			b64Text: setB64Src,
-			b64: setB64Dest,
+			b64Text: onChangeB64Src,
+			b64: onChangeB64Dest,
 			hexText: setHexSrc,
 			hex: setHexDest,
 			jot: setJotSrc,
@@ -65,33 +81,13 @@ const Converters = () => {
 		},
 	);
 
-	const handleB64SrcChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		const val = e.target.value;
-		setB64Src(val);
-		setB64Dest(btoa(val));
-		setB64Err(false);
-	};
-
-	const handleB64DestChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		const val = e.target.value;
-		setB64Dest(val);
-		try {
-			setB64Src(atob(val));
-			setB64Err(false);
-		} catch {
-			setB64Err(true);
-		}
-	};
-
-	const handleHexSrcChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		const val = e.target.value;
+	const handleHexSrcChange = (val: string) => {
 		setHexSrc(val);
 		setHexDest(convertToHex(val));
 		setHexErr(false);
 	};
 
-	const handleHexDestChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		const val = e.target.value;
+	const handleHexDestChange = (val: string) => {
 		setHexDest(val);
 		try {
 			setHexSrc(convertFromHex(val));
@@ -101,8 +97,7 @@ const Converters = () => {
 		}
 	};
 
-	const handleJotSrcChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		const val = e.target.value;
+	const handleJotSrcChange = (val: string) => {
 		try {
 			setJotSrc(val);
 			const [, meat] = val.split('.');
@@ -116,8 +111,7 @@ const Converters = () => {
 		}
 	};
 
-	const handleJotDestChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		const val = e.target.value;
+	const handleJotDestChange = (val: string) => {
 		setJotDest(val);
 	};
 
@@ -128,8 +122,8 @@ const Converters = () => {
 					heading: 'Text to Base64',
 					srcValue: b64Src,
 					destValue: b64Dest,
-					onChangeSrc: handleB64SrcChange,
-					onChangeDest: handleB64DestChange,
+					onChangeSrc: e => onChangeB64Src(e.target.value),
+					onChangeDest: e => onChangeB64Dest(e.target.value),
 				}}
 			/>
 			<Converter
@@ -137,8 +131,8 @@ const Converters = () => {
 					heading: 'Text to Hex',
 					srcValue: hexSrc,
 					destValue: hexDest,
-					onChangeSrc: handleHexSrcChange,
-					onChangeDest: handleHexDestChange,
+					onChangeSrc: e => handleHexSrcChange(e.target.value),
+					onChangeDest: e => handleHexDestChange(e.target.value),
 				}}
 			/>
 			<Converter
@@ -146,8 +140,8 @@ const Converters = () => {
 					heading: 'Decode JOT',
 					srcValue: jotSrc,
 					destValue: jotDest,
-					onChangeSrc: handleJotSrcChange,
-					onChangeDest: handleJotDestChange,
+					onChangeSrc: e => handleJotSrcChange(e.target.value),
+					onChangeDest: e => handleJotDestChange(e.target.value),
 				}}
 			/>
 		</Column>
