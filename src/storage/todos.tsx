@@ -14,6 +14,7 @@ export interface Todo {
 	id?: number;
 	text: string;
 	priority: Priority;
+	lane?: string;
 	completed?: boolean;
 }
 

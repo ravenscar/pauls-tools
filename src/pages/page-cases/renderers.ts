@@ -3,6 +3,13 @@ type TRenderer = (parts: string[]) => {
 	value: string;
 };
 
+const flatRenderer: TRenderer = parts => {
+	return {
+		name: 'flat',
+		value: parts.join(''),
+	};
+};
+
 const kebabRenderer: TRenderer = parts => {
 	return {
 		name: 'kebab-case',
@@ -104,6 +111,7 @@ const titleCase: TRenderer = parts => {
 };
 
 export const renderers: TRenderer[] = [
+	flatRenderer,
 	kebabRenderer,
 	snakeRenderer,
 	camelRenderer,
