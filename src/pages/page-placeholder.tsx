@@ -15,10 +15,10 @@ const Highlight = styled.span`
 	padding-right: 2px;
 `;
 
-const Placeholder = ({role}: {role: string}) => (
+const Placeholder = () => (
 	<PageContent>
 		<p>
-			This is a placeholder page for <Highlight>{role}</Highlight>.
+			This is a <Highlight>placeholder page</Highlight>.
 		</p>
 	</PageContent>
 );
